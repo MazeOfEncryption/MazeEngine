@@ -1,10 +1,14 @@
+#define _USE_MATH_DEFINES
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include <glm.hpp>
 #include <gtx/string_cast.hpp>
 #include <ext.hpp>
+#include <cmath>
 #include <vector>
 #include <string>
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <algorithm>
+#include <iterator>
