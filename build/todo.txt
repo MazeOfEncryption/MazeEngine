@@ -1,8 +1,9 @@
-Todo:
+﻿Todo:
 ✔ Implement file loading method
 ✔ Implement shader compiler
 ✔ Use GLM Matricies
-∙ Figure out GLFW mouse tracking / pointerlock
+✔ Figure out GLFW mouse tracking / pointerlock
+∙ Implement Basic Lighting
 ∙ Implement multi object and shader support
-∙ Implement STL loading (maybe other formats, STL is easy to start with)
 ∙ Implement material files (shaders + textures + maps)
+∙ Implement STL loading (maybe other formats, STL is easy to start with)

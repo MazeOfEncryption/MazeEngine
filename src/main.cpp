@@ -30,23 +30,42 @@ void keyEvent(GLFWwindow* window, int key, int scancode, int action, int mods) {
 }
 int main() {
 	std::vector<float> vertices {
-		 0.5f,  0.5f, -0.5f,  -0.5f,  0.5f, -0.5f,   0.5f, -0.5f, -0.5f,
-		-0.5f,  0.5f, -0.5f,   0.5f, -0.5f, -0.5f,  -0.5f, -0.5f, -0.5f,
+		 0.5f,  0.5f, -0.5f,  -0.5f,  0.5f, -0.5f,   0.5f, -0.5f, -0.5f, // back
+		-0.5f,  0.5f, -0.5f,   0.5f, -0.5f, -0.5f,  -0.5f, -0.5f, -0.5f, // normals  0  0 -1
 		
-		-0.5f,  0.5f, -0.5f,  -0.5f,  0.5f,  0.5f,  -0.5f, -0.5f, -0.5f,
-		-0.5f,  0.5f,  0.5f,  -0.5f, -0.5f, -0.5f,  -0.5f, -0.5f,  0.5f,
+		-0.5f,  0.5f, -0.5f,  -0.5f,  0.5f,  0.5f,  -0.5f, -0.5f, -0.5f, // left
+		-0.5f,  0.5f,  0.5f,  -0.5f, -0.5f, -0.5f,  -0.5f, -0.5f,  0.5f, // normals -1  0  0
 		
-		-0.5f,  0.5f,  0.5f,  -0.5f, -0.5f,  0.5f,   0.5f,  0.5f,  0.5f,
-		-0.5f, -0.5f,  0.5f,   0.5f,  0.5f,  0.5f,   0.5f, -0.5f,  0.5f,
+		-0.5f,  0.5f,  0.5f,  -0.5f, -0.5f,  0.5f,   0.5f,  0.5f,  0.5f, // front
+		-0.5f, -0.5f,  0.5f,   0.5f,  0.5f,  0.5f,   0.5f, -0.5f,  0.5f, // normals  0  0  1
 		
-		 0.5f,  0.5f,  0.5f,   0.5f, -0.5f,  0.5f,   0.5f,  0.5f, -0.5f,
-		 0.5f, -0.5f,  0.5f,   0.5f,  0.5f, -0.5f,   0.5f, -0.5f, -0.5f,
+		 0.5f,  0.5f,  0.5f,   0.5f, -0.5f,  0.5f,   0.5f,  0.5f, -0.5f, // right
+		 0.5f, -0.5f,  0.5f,   0.5f,  0.5f, -0.5f,   0.5f, -0.5f, -0.5f, // normals  1  0  0
 		
-		 0.5f,  0.5f, -0.5f,  -0.5f,  0.5f, -0.5f,   0.5f,  0.5f,  0.5f,
-		-0.5f,  0.5f, -0.5f,   0.5f,  0.5f,  0.5f,  -0.5f,  0.5f,  0.5f,
+		 0.5f,  0.5f, -0.5f,  -0.5f,  0.5f, -0.5f,   0.5f,  0.5f,  0.5f, // top
+		-0.5f,  0.5f, -0.5f,   0.5f,  0.5f,  0.5f,  -0.5f,  0.5f,  0.5f, // normals  0  1  0
 		
-		 0.5f, -0.5f, -0.5f,  -0.5f, -0.5f, -0.5f,   0.5f, -0.5f,  0.5f,
-		-0.5f, -0.5f, -0.5f,   0.5f, -0.5f,  0.5f,  -0.5f, -0.5f,  0.5f,
+		 0.5f, -0.5f, -0.5f,  -0.5f, -0.5f, -0.5f,   0.5f, -0.5f,  0.5f, // bottom
+		-0.5f, -0.5f, -0.5f,   0.5f, -0.5f,  0.5f,  -0.5f, -0.5f,  0.5f, // normals  0 -1  0
+	};
+	std::vector<float> normals {
+		 0.0f,  0.0f, -1.0f,   0.0f,  0.0f, -1.0f,   0.0f,  0.0f, -1.0f,
+		 0.0f,  0.0f, -1.0f,   0.0f,  0.0f, -1.0f,   0.0f,  0.0f, -1.0f,
+		 
+		-1.0f,  0.0f,  0.0f,  -1.0f,  0.0f,  0.0f,  -1.0f,  0.0f,  0.0f,
+		-1.0f,  0.0f,  0.0f,  -1.0f,  0.0f,  0.0f,  -1.0f,  0.0f,  0.0f,
+		
+		 0.0f,  0.0f,  1.0f,   0.0f,  0.0f,  1.0f,   0.0f,  0.0f,  1.0f,
+		 0.0f,  0.0f,  1.0f,   0.0f,  0.0f,  1.0f,   0.0f,  0.0f,  1.0f,
+		 
+		 1.0f,  0.0f,  0.0f,   1.0f,  0.0f,  0.0f,   1.0f,  0.0f,  0.0f,
+		 1.0f,  0.0f,  0.0f,   1.0f,  0.0f,  0.0f,   1.0f,  0.0f,  0.0f,
+		 
+		 0.0f,  1.0f,  0.0f,   0.0f,  1.0f,  0.0f,   0.0f,  1.0f,  0.0f,
+		 0.0f,  1.0f,  0.0f,   0.0f,  1.0f,  0.0f,   0.0f,  1.0f,  0.0f,
+		 
+		 0.0f, -1.0f,  0.0f,   0.0f, -1.0f,  0.0f,   0.0f, -1.0f,  0.0f,
+		 0.0f, -1.0f,  0.0f,   0.0f, -1.0f,  0.0f,   0.0f, -1.0f,  0.0f,
 	};
 	glfwInit();
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
@@ -116,13 +135,27 @@ int main() {
 	glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
 	glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(float), vertices.data(), GL_STATIC_DRAW);
 	
+	unsigned normalBuffer;
+	glGenBuffers(1, &normalBuffer);
+	glBindBuffer(GL_ARRAY_BUFFER, normalBuffer);
+	glBufferData(GL_ARRAY_BUFFER, normals.size() * sizeof(float), normals.data(), GL_STATIC_DRAW);
+	
 	std::cout << read("./todo.txt") << std::endl;
 	
 	glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
-	glEnableVertexAttribArray(0);
+	unsigned a_vertices = glGetAttribLocation(shaderProgram, "a_vertices");
+	glVertexAttribPointer(a_vertices, 3, GL_FLOAT, GL_FALSE, 0, 0);
+	glEnableVertexAttribArray(a_vertices);
+	
+	glBindBuffer(GL_ARRAY_BUFFER, normalBuffer);
+	unsigned a_normals = glGetAttribLocation(shaderProgram, "a_normals");
+	glVertexAttribPointer(a_normals, 3, GL_FLOAT, GL_FALSE, 0, 0);
+	glEnableVertexAttribArray(a_normals);
 	
 	unsigned u_worldMatrix = glGetUniformLocation(shaderProgram, "u_worldMatrix");
+	unsigned u_location = glGetUniformLocation(shaderProgram, "u_location");
+	unsigned u_rotation = glGetUniformLocation(shaderProgram, "u_rotation");
+	unsigned u_camera = glGetUniformLocation(shaderProgram, "u_camera");
 	
 	glm::mat4 projection;
 	glm::mat4 view;
@@ -132,6 +165,7 @@ int main() {
 	glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f);
 	glm::mat4 rotationX;
 	glm::mat4 rotationY;
+	glm::mat4 rotation;
 	glm::mat4 location;
 	glm::mat4 worldMatrix;
 	
@@ -141,8 +175,9 @@ int main() {
 	float angleX = 0.0f, angleY = 220.0f;
 	float locX = 0.0f, locY = 0.0f;
 	std::vector<float> speed {0.0f, 0.0f, 0.0f, 0.0f};
-	float max = 0.025f, acc = 0.001f, dec = 0.001f;
+	float max = 3.0f, acc = 0.5f, dec = 0.5f;
 	int width, height;
+	float fps = 0.0f, dt = 0.0f;
 	float radiansX, radiansY;
 	glfwGetCursorPos(window, &lastX, &lastY);
 	
@@ -189,49 +224,49 @@ int main() {
 		radiansY = glm::radians(angleY);
 		
 		for (int x = 0; x < 4; x++) {
+			// If keys true add acc, else sub dec, coerce between zero and max
 			speed[x] = keys[x] ? (speed[x] + acc > max ? max : speed[x] + acc) : (speed[x] - dec < 0 ? 0 : speed[x] - dec);
+			// Compute angle, subtract 90 deg if sideways 
 			float angle = angleX * M_PI / 180 - (x % 2 ? M_PI / 2 : 0);
-			// float dir = ((x >> 1) % 2 == x % 2) * 2 - 1;
-			float dir;
-			switch(x) {
-				case 0: dir = -1; break;
-				case 1: dir = -1; break;
-				case 2: dir =  1; break;
-				case 3: dir =  1; break;
-				default: break;
-			}
-			locX += speed[x] * sin(angle) * dir;
-			locY -= speed[x] * cos(angle) * dir;
+			// Compute direction
+			float dir = x < 2 ? -1 : 1;
+			// Add speed in direction in dt
+			locX += speed[x] * sin(angle) * dir * dt;
+			locY -= speed[x] * cos(angle) * dir * dt;
 		}
 		
 		location = glm::translate(glm::mat4(1.0f), glm::vec3(locX, 0.0f, locY));
-		
 		projection = glm::perspective(glm::radians(90.0f), (float) width / (float) height, 0.1f, 50.0f);
-		
 		rotationX = glm::rotate(glm::mat4(1.0f), radiansX, glm::vec3( 0.0f, -1.0f, 0.0f));
 		rotationY = glm::rotate(glm::mat4(1.0f), radiansY, glm::vec3(-1.0f,  0.0f, 0.0f));
-		target = glm::vec3(rotationX * rotationY * glm::vec4(0.0f, 0.0f, 1.0f, 1.0f));
-		
+		rotation = rotationX * rotationY;
+		target = glm::vec3(rotation * glm::vec4(0.0f, 0.0f, 1.0f, 1.0f));
 		view = glm::lookAt(
 			camera,
 			camera + target,
 			up
 		);
-		
 		worldMatrix = projection * view * location;
 		
 		glUniformMatrix4fv(u_worldMatrix, 1, GL_FALSE, glm::value_ptr(worldMatrix));
+		glUniformMatrix4fv(u_location, 1, GL_FALSE, glm::value_ptr(location));
+		glUniformMatrix4fv(u_rotation, 1, GL_FALSE, glm::value_ptr(rotation));
+		glUniform3fv(u_rotation, 1, glm::value_ptr(camera));
 		
 		glBindVertexArray(vao);
-		glDrawArrays(GL_TRIANGLES, 0, 36);
+		glDrawArrays(GL_TRIANGLES, 0, vertices.size() / 3);
 		
 		glfwSwapBuffers(window);
 		glfwPollEvents();
 		
-		float dt = glfwGetTime() - t;
-		float fps = 1.0f / dt;
+		dt = glfwGetTime() - t;
+		fps = 1.0f / dt;
 		
-		std::string title = "MazeEngine --- FPS: " + std::to_string(fps) + " --- rx: " + std::to_string(radiansX) + " ry: " + std::to_string(radiansY) + " --- W: " + std::to_string(keys[0]) + " A: " + std::to_string(keys[1]) + " S: " + std::to_string(keys[2]) + " D: " + std::to_string(keys[3]);
+		std::ostringstream oss;
+		oss << "MazeEngine --- FPS: " << fps << " DT: " << dt;
+		oss << " --- rx: " << radiansX << " ry: " << radiansY;
+		oss << " --- W: " << keys[0] << " A: " << keys[1] << " S: " << keys[2] << " D: " << keys[3];
+		std::string title = oss.str();
 		glfwSetWindowTitle(window, title.c_str());
 	}
 	return 0;
