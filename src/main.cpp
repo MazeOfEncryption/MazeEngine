@@ -241,11 +241,7 @@ int main() {
 		rotationY = glm::rotate(glm::mat4(1.0f), radiansY, glm::vec3(-1.0f,  0.0f, 0.0f));
 		rotation = rotationX * rotationY;
 		target = glm::vec3(rotation * glm::vec4(0.0f, 0.0f, 1.0f, 1.0f));
-		view = glm::lookAt(
-			camera,
-			camera + target,
-			up
-		);
+		view = glm::lookAt(camera, camera + target,	up);
 		worldMatrix = projection * view * location;
 		
 		glUniformMatrix4fv(u_worldMatrix, 1, GL_FALSE, glm::value_ptr(worldMatrix));

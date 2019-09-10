@@ -1,23 +1,27 @@
 #version 330 core
 in lowp vec4 v_color;
-in lowp vec3 v_normals;
-in lowp vec3 v_surfaceToLight;
-in lowp vec3 v_camera;
+in lowp vec3 v_normal;
+in lowp vec3 v_fragPos;
+in lowp vec3 v_cameraPos;
 out highp vec4 color;
 void main () {
-	vec3 normals = normalize(v_normals);
+	vec3 lightColor = vec3(1.0f, 1.0f, 1.0f);
+	vec3 objectColor = vec3(1.0f, 0.2f, 0.2f);
+	float ambientStrength = 0.1f;
+	float specularStrength = 0.5f;
+	float metallic = 32;
 	
-	vec3 surfaceToLight = normalize(v_surfaceToLight);
-	vec3 camera = normalize(v_camera);
-	vec3 halfVector = normalize(surfaceToLight + camera);
+	vec3 normal = normalize(v_normal);
+	vec3 lightDirection = normalize(vec3(0.2f, 1.0f, 0.3f) - v_fragPos);
 	
-	float light = dot(normals, surfaceToLight);
-	float specular = 0.0f;
-	if (light > 0.0f) {
-		specular = pow(dot(normals, halfVector), 150.0f);
-	}
+	vec3 ambient = ambientStrength * lightColor;
+	vec3 diffuse = max(dot(normal, lightDirection), 0.0f) * lightColor;
 	
-	color = vec4(vec3(0.5f), 1.0f);
-	color.rgb *= light;
-	color.rgb += specular;
+	vec3 viewDir = normalize(v_cameraPos - v_fragPos);
+	vec3 reflectDir = reflect(-lightDirection, normal);  
+	vec3 specular = specularStrength * pow(max(dot(viewDir, reflectDir), 0.0), metallic) * lightColor;
+	
+	vec3 light = (ambient + diffuse + specular) * objectColor;
+	
+	color = vec4(light, 1.0f);
 }
