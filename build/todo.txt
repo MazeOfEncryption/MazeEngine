@@ -3,7 +3,9 @@
 ✔ Implement shader compiler
 ✔ Use GLM Matricies
 ✔ Figure out GLFW mouse tracking / pointerlock
-∙ Implement Basic Lighting
-∙ Implement multi object and shader support
-∙ Implement material files (shaders + textures + maps)
-∙ Implement STL loading (maybe other formats, STL is easy to start with)
+✔ Implement Basic Lighting
+∙ Phong Shading
+∙ Realtime Shader Reloading
+∙ Multi object and shader support
+∙ Material files (shaders + textures + maps)
+∙ STL loading (maybe other formats, STL is easy to start with)

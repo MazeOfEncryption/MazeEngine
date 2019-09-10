@@ -21,7 +21,7 @@ void main () {
 	vec3 reflectDir = reflect(-lightDirection, normal);  
 	vec3 specular = specularStrength * pow(max(dot(viewDir, reflectDir), 0.0), metallic) * lightColor;
 	
-	vec3 light = (ambient + diffuse + specular) * objectColor;
+	vec3 light = (specular) * objectColor;
 	
 	color = vec4(light, 1.0f);
 }

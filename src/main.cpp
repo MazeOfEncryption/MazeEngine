@@ -23,10 +23,72 @@ void windowFocus (GLFWwindow* window, int focused) {
 }
 // GLFW callback to get key presses
 std::vector<bool> keys {false, false, false, false};
+bool reloadShaders = false;
 void keyEvent(GLFWwindow* window, int key, int scancode, int action, int mods) {
 	std::vector<int> keyList {GLFW_KEY_W, GLFW_KEY_A, GLFW_KEY_S, GLFW_KEY_D};
 	int index = indexOf<int>(key, keyList);
 	if (index < 4 && action != GLFW_REPEAT) keys[index] = action;
+	if (key == GLFW_KEY_R && action == GLFW_PRESS) reloadShaders = true;
+}
+int compileShaders() {
+	std::string vertexShaderCode = read("./shaders/vert.glsl");
+	std::string fragmentShaderCode = read("./shaders/frag.glsl");
+	
+	const char * vertexShaderSource = vertexShaderCode.c_str();
+	const char * fragmentShaderSource = fragmentShaderCode.c_str();
+	
+	int success;
+	char infoLog[512];
+	
+	int vertexShader = glCreateShader(GL_VERTEX_SHADER);
+	glShaderSource(vertexShader, 1, &vertexShaderSource, NULL);
+	glCompileShader(vertexShader);
+	// Shader Error Logging
+	glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &success);
+	if (!success) {
+		glGetShaderInfoLog(vertexShader, 512, NULL, infoLog);
+		std::cout << "ERROR::SHADER::VERTEX::COMPILATION_FAILED\n" << infoLog << std::endl;
+	}
+	
+	int fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
+	glShaderSource(fragmentShader, 1, &fragmentShaderSource, NULL);
+	glCompileShader(fragmentShader);	
+	// Shader Error Logging
+	glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &success);
+	if (!success) {
+		glGetShaderInfoLog(fragmentShader, 512, NULL, infoLog);
+		std::cout << "ERROR::SHADER::FRAGMENT::COMPILATION_FAILED\n" << infoLog << std::endl;
+	}
+	
+	int shaderProgram = glCreateProgram();
+	glAttachShader(shaderProgram, vertexShader);
+	glAttachShader(shaderProgram, fragmentShader);
+	glLinkProgram(shaderProgram);
+	// Shader Error Logging
+	glGetProgramiv(shaderProgram, GL_LINK_STATUS, &success);
+	if (!success) {
+		glGetProgramInfoLog(shaderProgram, 512, NULL, infoLog);
+		std::cout << "ERROR::SHADER::PROGRAM::LINKING_FAILED\n" << infoLog << std::endl;
+	}
+	
+	glDeleteShader(vertexShader);
+	glDeleteShader(fragmentShader);
+	
+	return shaderProgram;
+}
+void recompileShaders (int *program) {
+	glDeleteProgram(*program);
+	*program = compileShaders();
+	std::cout << "Reloaded Shaders." << std::endl;
+}
+unsigned a_vertices, a_normals, u_worldMatrix, u_location, u_rotation, u_camera;
+void getLocations(int *shaderProgram) {
+	a_vertices = glGetAttribLocation(*shaderProgram, "a_vertices");
+	a_normals = glGetAttribLocation(*shaderProgram, "a_normals");
+	u_worldMatrix = glGetUniformLocation(*shaderProgram, "u_worldMatrix");
+	u_location = glGetUniformLocation(*shaderProgram, "u_location");
+	u_rotation = glGetUniformLocation(*shaderProgram, "u_rotation");
+	u_camera = glGetUniformLocation(*shaderProgram, "u_camera");
 }
 int main() {
 	std::vector<float> vertices {
@@ -80,51 +142,7 @@ int main() {
 	glfwSetWindowFocusCallback(window, windowFocus);
 	glfwSetKeyCallback(window, keyEvent);
 	
-	std::string vertexShaderCode = read("./shaders/vert.glsl");
-	std::string fragmentShaderCode = read("./shaders/frag.glsl");
-	
-	const char * vertexShaderSource = vertexShaderCode.c_str();
-	const char * fragmentShaderSource = fragmentShaderCode.c_str();
-	
-	//std::cout << "Vertex Shader:\n" << vertexShaderCode << std::endl;
-	//std::cout << "Fragment Shader:\n" << fragmentShaderCode << std::endl;
-	
-	int success;
-	char infoLog[512];
-	
-	int vertexShader = glCreateShader(GL_VERTEX_SHADER);
-	glShaderSource(vertexShader, 1, &vertexShaderSource, NULL);
-	glCompileShader(vertexShader);
-	// Shader Error Logging
-	glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &success);
-	if (!success) {
-		glGetShaderInfoLog(vertexShader, 512, NULL, infoLog);
-		std::cout << "ERROR::SHADER::VERTEX::COMPILATION_FAILED\n" << infoLog << std::endl;
-	}
-	
-	int fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
-	glShaderSource(fragmentShader, 1, &fragmentShaderSource, NULL);
-	glCompileShader(fragmentShader);	
-	// Shader Error Logging
-	glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &success);
-	if (!success) {
-		glGetShaderInfoLog(fragmentShader, 512, NULL, infoLog);
-		std::cout << "ERROR::SHADER::FRAGMENT::COMPILATION_FAILED\n" << infoLog << std::endl;
-	}
-	
-	int shaderProgram = glCreateProgram();
-	glAttachShader(shaderProgram, vertexShader);
-	glAttachShader(shaderProgram, fragmentShader);
-	glLinkProgram(shaderProgram);
-	// Shader Error Logging
-	glGetProgramiv(shaderProgram, GL_LINK_STATUS, &success);
-	if (!success) {
-		glGetProgramInfoLog(shaderProgram, 512, NULL, infoLog);
-		std::cout << "ERROR::SHADER::PROGRAM::LINKING_FAILED\n" << infoLog << std::endl;
-	}
-	
-	glDeleteShader(vertexShader);
-	glDeleteShader(fragmentShader);
+	int shaderProgram = compileShaders();
 	
 	unsigned vao;
 	glGenVertexArrays(1, &vao);
@@ -142,20 +160,15 @@ int main() {
 	
 	std::cout << read("./todo.txt") << std::endl;
 	
+	getLocations(&shaderProgram);
+	
 	glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
-	unsigned a_vertices = glGetAttribLocation(shaderProgram, "a_vertices");
 	glVertexAttribPointer(a_vertices, 3, GL_FLOAT, GL_FALSE, 0, 0);
 	glEnableVertexAttribArray(a_vertices);
 	
 	glBindBuffer(GL_ARRAY_BUFFER, normalBuffer);
-	unsigned a_normals = glGetAttribLocation(shaderProgram, "a_normals");
 	glVertexAttribPointer(a_normals, 3, GL_FLOAT, GL_FALSE, 0, 0);
 	glEnableVertexAttribArray(a_normals);
-	
-	unsigned u_worldMatrix = glGetUniformLocation(shaderProgram, "u_worldMatrix");
-	unsigned u_location = glGetUniformLocation(shaderProgram, "u_location");
-	unsigned u_rotation = glGetUniformLocation(shaderProgram, "u_rotation");
-	unsigned u_camera = glGetUniformLocation(shaderProgram, "u_camera");
 	
 	glm::mat4 projection;
 	glm::mat4 view;
@@ -185,6 +198,13 @@ int main() {
 	glUseProgram(shaderProgram);
 	
 	while (!glfwWindowShouldClose(window)) {
+		if (reloadShaders) {
+			recompileShaders(&shaderProgram);
+			getLocations(&shaderProgram);
+			glUseProgram(shaderProgram);
+			reloadShaders = false;
+		}
+		
 		float t = glfwGetTime();
 		glClearColor(0.2f, 0.3f, 0.4f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);  
