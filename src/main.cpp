@@ -198,6 +198,8 @@ int main() {
 	glUseProgram(shaderProgram);
 	
 	while (!glfwWindowShouldClose(window)) {
+		float t = glfwGetTime();
+		
 		if (reloadShaders) {
 			recompileShaders(&shaderProgram);
 			getLocations(&shaderProgram);
@@ -205,7 +207,6 @@ int main() {
 			reloadShaders = false;
 		}
 		
-		float t = glfwGetTime();
 		glClearColor(0.2f, 0.3f, 0.4f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);  
 		
@@ -251,11 +252,11 @@ int main() {
 			// Compute direction
 			float dir = x < 2 ? -1 : 1;
 			// Add speed in direction in dt
-			locX += speed[x] * sin(angle) * dir * dt;
-			locY -= speed[x] * cos(angle) * dir * dt;
+			camera += speed[x] * sin(angle) * dir * dt * glm::vec3(0.0f, 0.0f, 0.0f);
+			camera -= speed[x] * cos(angle) * dir * dt * glm::vec3(0.0f, 0.0f, 0.0f);
 		}
 		
-		location = glm::translate(glm::mat4(1.0f), glm::vec3(locX, 0.0f, locY));
+		location = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 0.0f));
 		projection = glm::perspective(glm::radians(90.0f), (float) width / (float) height, 0.1f, 50.0f);
 		rotationX = glm::rotate(glm::mat4(1.0f), radiansX, glm::vec3( 0.0f, -1.0f, 0.0f));
 		rotationY = glm::rotate(glm::mat4(1.0f), radiansY, glm::vec3(-1.0f,  0.0f, 0.0f));
