@@ -7,12 +7,12 @@ out highp vec4 color;
 void main () {
 	vec3 lightColor = vec3(1.0f, 1.0f, 1.0f);
 	vec3 objectColor = vec3(1.0f, 0.2f, 0.2f);
-	float ambientStrength = 0.1f;
+	float ambientStrength = 0.2f;
 	float specularStrength = 0.5f;
-	float metallic = 32;
+	float metallic = 64;
 	
 	vec3 normal = normalize(v_normal);
-	vec3 lightDirection = normalize(vec3(0.2f, 1.0f, 0.3f) - v_fragPos);
+	vec3 lightDirection = normalize(vec3(2.0f, 2.0f, 1.0f) - v_fragPos);
 	
 	vec3 ambient = ambientStrength * lightColor;
 	vec3 diffuse = max(dot(normal, lightDirection), 0.0f) * lightColor;
@@ -21,7 +21,7 @@ void main () {
 	vec3 reflectDir = reflect(-lightDirection, normal);  
 	vec3 specular = specularStrength * pow(max(dot(viewDir, reflectDir), 0.0), metallic) * lightColor;
 	
-	vec3 light = (ambient + diffuse) * objectColor;
+	vec3 light = (specular) * objectColor;
 	
 	color = vec4(light, 1.0f);
 }

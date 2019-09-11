@@ -81,14 +81,14 @@ void recompileShaders (int *program) {
 	*program = compileShaders();
 	std::cout << "Reloaded Shaders." << std::endl;
 }
-unsigned a_vertices, a_normals, u_worldMatrix, u_location, u_rotation, u_camera;
+unsigned a_vertices, a_normals, u_worldMatrix, u_rotation, u_camera, u_view;
 void getLocations(int *shaderProgram) {
 	a_vertices = glGetAttribLocation(*shaderProgram, "a_vertices");
 	a_normals = glGetAttribLocation(*shaderProgram, "a_normals");
 	u_worldMatrix = glGetUniformLocation(*shaderProgram, "u_worldMatrix");
-	u_location = glGetUniformLocation(*shaderProgram, "u_location");
 	u_rotation = glGetUniformLocation(*shaderProgram, "u_rotation");
 	u_camera = glGetUniformLocation(*shaderProgram, "u_camera");
+	u_view = glGetUniformLocation(*shaderProgram, "u_view");
 }
 int main() {
 	std::vector<float> vertices {
@@ -179,7 +179,6 @@ int main() {
 	glm::mat4 rotationX;
 	glm::mat4 rotationY;
 	glm::mat4 rotation;
-	glm::mat4 location;
 	glm::mat4 worldMatrix;
 	
 	double lastX, lastY;
@@ -252,23 +251,22 @@ int main() {
 			// Compute direction
 			float dir = x < 2 ? -1 : 1;
 			// Add speed in direction in dt
-			camera += speed[x] * sin(angle) * dir * dt * glm::vec3(0.0f, 0.0f, 0.0f);
-			camera -= speed[x] * cos(angle) * dir * dt * glm::vec3(0.0f, 0.0f, 0.0f);
+			camera.x -= speed[x] * sin(angle) * dir * dt;
+			camera.z += speed[x] * cos(angle) * dir * dt;
 		}
 		
-		location = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 0.0f));
 		projection = glm::perspective(glm::radians(90.0f), (float) width / (float) height, 0.1f, 50.0f);
 		rotationX = glm::rotate(glm::mat4(1.0f), radiansX, glm::vec3( 0.0f, -1.0f, 0.0f));
 		rotationY = glm::rotate(glm::mat4(1.0f), radiansY, glm::vec3(-1.0f,  0.0f, 0.0f));
 		rotation = rotationX * rotationY;
 		target = glm::vec3(rotation * glm::vec4(0.0f, 0.0f, 1.0f, 1.0f));
 		view = glm::lookAt(camera, camera + target,	up);
-		worldMatrix = projection * view * location;
+		worldMatrix = projection * view;
 		
 		glUniformMatrix4fv(u_worldMatrix, 1, GL_FALSE, glm::value_ptr(worldMatrix));
-		glUniformMatrix4fv(u_location, 1, GL_FALSE, glm::value_ptr(location));
 		glUniformMatrix4fv(u_rotation, 1, GL_FALSE, glm::value_ptr(rotation));
-		glUniform3fv(u_rotation, 1, glm::value_ptr(camera));
+		glUniformMatrix4fv(u_view, 1, GL_FALSE, glm::value_ptr(view));
+		glUniform3fv(u_camera, 1, glm::value_ptr(camera));
 		
 		glBindVertexArray(vao);
 		glDrawArrays(GL_TRIANGLES, 0, vertices.size() / 3);
