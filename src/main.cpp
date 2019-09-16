@@ -91,6 +91,26 @@ void getLocations(int *shaderProgram) {
 	u_view = glGetUniformLocation(*shaderProgram, "u_view");
 }
 int main() {
+	std::string object = read("./object.stl");
+	std::string header = object.substr(0, 80);
+	object.erase(0, 80);
+	std::cout << "Header: " << header << std::endl;
+	std::string lengthBytes = object.substr(0, 4);
+	object.erase(0, 4);
+	unsigned length = lengthBytes[0] | lengthBytes[1] << 8 | lengthBytes[2] << 16 | lengthBytes[3] << 24;
+	std::cout << "Length: " << length << std::endl;
+	std::vector<float> objectVertices;
+	std::vector<float> objectNormals;
+	//for (unsigned x = 0; x < length; x++) {
+		std::string normalString = object.substr(0, sizeof(float) * 3);
+		float normalVector[3];
+		char normalBytes[3][4];
+		normalString.copy(*normalBytes, 12, 0);
+		memcpy(&normalVector, &normalBytes, sizeof(normalVector));
+		std::cout << normalVector[0] << std::endl;
+		std::cout << normalVector[1] << std::endl;
+		std::cout << normalVector[2] << std::endl;
+	//}
 	std::vector<float> vertices {
 		 0.5f,  0.5f, -0.5f,  -0.5f,  0.5f, -0.5f,   0.5f, -0.5f, -0.5f, // back
 		-0.5f,  0.5f, -0.5f,   0.5f, -0.5f, -0.5f,  -0.5f, -0.5f, -0.5f, // normals  0  0 -1
