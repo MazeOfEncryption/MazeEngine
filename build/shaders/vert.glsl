@@ -13,7 +13,7 @@ void main () {
 	v_color = vec4(a_vertices + vec3(0.5f), 1.0f);
 	v_normal = a_normals;
 	
-	v_fragPos = vec3(u_view * vec4(a_vertices, 1.0f));
+	v_fragPos = a_vertices;
 	v_cameraPos = u_camera;
 	
 	gl_Position = u_worldMatrix * vec4(a_vertices, 1.0f);
