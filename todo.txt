@@ -7,6 +7,7 @@
 ✔ Realtime Shader Reloading
 ✔ Phong Shading
 ✔ STL loading (maybe other formats, STL is easy to start with)
+∙ PLY loading (for per-vertex normals)
 ∙ Clean up STL loading code
 ∙ Multi object and shader support
 ∙ Material files (shaders + textures + maps)
