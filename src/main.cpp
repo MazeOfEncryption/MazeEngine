@@ -103,51 +103,28 @@ int main() {
 	std::string lengthBytes = object.substr(80, 4);
 	unsigned length = lengthBytes[0] | lengthBytes[1] << 8 | lengthBytes[2] << 16 | lengthBytes[3] << 24;
 	std::cout << "Length: " << length << std::endl;
-	std::vector<float> objectVertices;
-	std::vector<float> objectNormals;
-	for (unsigned x = 0; x < length * 2; x++) {
-		std::string normalString = object.substr(84 + x * sizeof(float), sizeof(float));
-		float normal = getFloat(normalString);
-		std::cout << normal << std::endl;
+	std::vector<float> vertices;
+	std::vector<float> normals;
+	int position = 84;
+	float newNormals[3];
+	for (unsigned x = 0; x < length; x++) {
+		memset(newNormals, 0, sizeof(newNormals));
+		for (int y = 0; y < 3; y++) {
+			std::string normalString = object.substr(position, sizeof(float));
+			position += sizeof(float);
+			float normal = getFloat(normalString);
+			newNormals[y] = normal;
+		}
+		for (int y = 0; y < 3; y++) normals.insert(normals.end(), std::begin(newNormals), std::end(newNormals));
+		for (int y = 0; y < 9; y++) {
+			std::string vertexString = object.substr(position, sizeof(float));
+			position += sizeof(float);
+			float vertex = getFloat(vertexString);
+			vertices.push_back(vertex);
+		}
+		position += 2;
 	}
-	std::vector<float> vertices {
-		 0.5f,  0.5f, -0.5f,  -0.5f,  0.5f, -0.5f,   0.5f, -0.5f, -0.5f, // back
-		-0.5f,  0.5f, -0.5f,   0.5f, -0.5f, -0.5f,  -0.5f, -0.5f, -0.5f, // normals  0  0 -1
-		
-		-0.5f,  0.5f, -0.5f,  -0.5f,  0.5f,  0.5f,  -0.5f, -0.5f, -0.5f, // left
-		-0.5f,  0.5f,  0.5f,  -0.5f, -0.5f, -0.5f,  -0.5f, -0.5f,  0.5f, // normals -1  0  0
-		
-		-0.5f,  0.5f,  0.5f,  -0.5f, -0.5f,  0.5f,   0.5f,  0.5f,  0.5f, // front
-		-0.5f, -0.5f,  0.5f,   0.5f,  0.5f,  0.5f,   0.5f, -0.5f,  0.5f, // normals  0  0  1
-		
-		 0.5f,  0.5f,  0.5f,   0.5f, -0.5f,  0.5f,   0.5f,  0.5f, -0.5f, // right
-		 0.5f, -0.5f,  0.5f,   0.5f,  0.5f, -0.5f,   0.5f, -0.5f, -0.5f, // normals  1  0  0
-		
-		 0.5f,  0.5f, -0.5f,  -0.5f,  0.5f, -0.5f,   0.5f,  0.5f,  0.5f, // top
-		-0.5f,  0.5f, -0.5f,   0.5f,  0.5f,  0.5f,  -0.5f,  0.5f,  0.5f, // normals  0  1  0
-		
-		 0.5f, -0.5f, -0.5f,  -0.5f, -0.5f, -0.5f,   0.5f, -0.5f,  0.5f, // bottom
-		-0.5f, -0.5f, -0.5f,   0.5f, -0.5f,  0.5f,  -0.5f, -0.5f,  0.5f, // normals  0 -1  0
-	};
-	std::vector<float> normals {
-		 0.0f,  0.0f, -1.0f,   0.0f,  0.0f, -1.0f,   0.0f,  0.0f, -1.0f,
-		 0.0f,  0.0f, -1.0f,   0.0f,  0.0f, -1.0f,   0.0f,  0.0f, -1.0f,
-		 
-		-1.0f,  0.0f,  0.0f,  -1.0f,  0.0f,  0.0f,  -1.0f,  0.0f,  0.0f,
-		-1.0f,  0.0f,  0.0f,  -1.0f,  0.0f,  0.0f,  -1.0f,  0.0f,  0.0f,
-		
-		 0.0f,  0.0f,  1.0f,   0.0f,  0.0f,  1.0f,   0.0f,  0.0f,  1.0f,
-		 0.0f,  0.0f,  1.0f,   0.0f,  0.0f,  1.0f,   0.0f,  0.0f,  1.0f,
-		 
-		 1.0f,  0.0f,  0.0f,   1.0f,  0.0f,  0.0f,   1.0f,  0.0f,  0.0f,
-		 1.0f,  0.0f,  0.0f,   1.0f,  0.0f,  0.0f,   1.0f,  0.0f,  0.0f,
-		 
-		 0.0f,  1.0f,  0.0f,   0.0f,  1.0f,  0.0f,   0.0f,  1.0f,  0.0f,
-		 0.0f,  1.0f,  0.0f,   0.0f,  1.0f,  0.0f,   0.0f,  1.0f,  0.0f,
-		 
-		 0.0f, -1.0f,  0.0f,   0.0f, -1.0f,  0.0f,   0.0f, -1.0f,  0.0f,
-		 0.0f, -1.0f,  0.0f,   0.0f, -1.0f,  0.0f,   0.0f, -1.0f,  0.0f,
-	};
+	std::cout << normals.size() << std::endl;
 	glfwInit();
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
