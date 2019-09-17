@@ -90,18 +90,20 @@ void getLocations(int *shaderProgram) {
 	u_camera = glGetUniformLocation(*shaderProgram, "u_camera");
 	u_view = glGetUniformLocation(*shaderProgram, "u_view");
 }
-float getFloat(std::string input) {
-	float output;
+// Function for copying bytes from a string to some type t
+template <typename type>
+type stringBytes (std::string input) {
+	type output;
 	const char *bytes = input.c_str();
-	memcpy(&output, bytes, sizeof(float));
+	memcpy(&output, bytes, sizeof(type));
 	return output;
 }
 int main() {
-	std::string object = read("./object.stl");
+	std::string object = read("./object3.stl");
 	std::string header = object.substr(0, 80);
 	std::cout << "Header: " << header << std::endl;
-	std::string lengthBytes = object.substr(80, 4);
-	unsigned length = lengthBytes[0] | lengthBytes[1] << 8 | lengthBytes[2] << 16 | lengthBytes[3] << 24;
+	std::string lengthString = object.substr(80, 4);
+	unsigned length = stringBytes<unsigned>(lengthString);
 	std::cout << "Length: " << length << std::endl;
 	std::vector<float> vertices;
 	std::vector<float> normals;
@@ -112,18 +114,19 @@ int main() {
 		for (int y = 0; y < 3; y++) {
 			std::string normalString = object.substr(position, sizeof(float));
 			position += sizeof(float);
-			float normal = getFloat(normalString);
+			float normal = stringBytes<float>(normalString);
 			newNormals[y] = normal;
 		}
 		for (int y = 0; y < 3; y++) normals.insert(normals.end(), std::begin(newNormals), std::end(newNormals));
 		for (int y = 0; y < 9; y++) {
 			std::string vertexString = object.substr(position, sizeof(float));
 			position += sizeof(float);
-			float vertex = getFloat(vertexString);
+			float vertex = stringBytes<float>(vertexString);
 			vertices.push_back(vertex);
 		}
 		position += 2;
 	}
+	std::cout << vertices.size() << std::endl;
 	std::cout << normals.size() << std::endl;
 	glfwInit();
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);

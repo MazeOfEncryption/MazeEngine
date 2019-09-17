@@ -6,6 +6,7 @@
 ✔ Implement Basic Lighting
 ✔ Realtime Shader Reloading
 ✔ Phong Shading
-∙ STL loading (maybe other formats, STL is easy to start with)
+✔ STL loading (maybe other formats, STL is easy to start with)
+∙ Clean up STL loading code
 ∙ Multi object and shader support
 ∙ Material files (shaders + textures + maps)
