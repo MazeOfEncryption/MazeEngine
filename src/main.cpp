@@ -180,7 +180,7 @@ void readPly (std::string file, std::vector<float> *vertices, std::vector<float>
 int main() {
 	std::vector<float> vertices, normals;
 	// readStl("object2.stl", &vertices, &normals);
-	readPly("object4.ply", &vertices, &normals);
+	readPly("object5.ply", &vertices, &normals);
 	glfwInit();
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
