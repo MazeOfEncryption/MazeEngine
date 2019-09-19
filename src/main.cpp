@@ -28,6 +28,7 @@ void keyEvent(GLFWwindow* window, int key, int scancode, int action, int mods) {
 	std::vector<int> keyList {GLFW_KEY_W, GLFW_KEY_A, GLFW_KEY_S, GLFW_KEY_D};
 	int index = indexOf<int>(key, keyList);
 	if (index < 4 && action != GLFW_REPEAT) keys[index] = action;
+	if (key == GLFW_KEY_W && action == GLFW_PRESS && (mods >> 1) & 1) glfwSetWindowShouldClose(window, GLFW_TRUE);
 	if (key == GLFW_KEY_R && action == GLFW_PRESS) reloadShaders = true;
 }
 int compileShaders() {
