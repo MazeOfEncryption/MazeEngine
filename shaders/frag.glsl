@@ -42,12 +42,15 @@ void main () {
 	vec3 lightColor = vec3(10.0f);
 	
 	vec3 albedo = vec3(1.0f, 0.0f, 0.0f);
-	float metallic = 0.5f, roughness = 0.625f, ao = 0.0f;
+	float metallic = 0.6f, roughness = 0.6f, ao = 0.0f;
 
 	vec3 N = normalize(v_normal);
 	vec3 V = normalize(v_cameraPos - v_fragPos);
-
-	vec3 F0 = vec3(0.003f);
+	
+	float ior = 1.0f;
+	float fresnel = ((1.0f - ior) * (1.0f + ior));
+	fresnel = fresnel * fresnel;
+	vec3 F0 = vec3(fresnel);
 	F0 = mix(F0, albedo, metallic);
 
 	vec3 Lo = vec3(0.0f);
@@ -60,6 +63,7 @@ void main () {
 		vec3 radiance = lightColor * attenuation;
 		float NDF = DistributionGGX(N, H, roughness);
 		float G = GeometrySmith(N, V, L, roughness);
+		// Should be dot(H, V)
 		vec3 F = fresnelSchlick(max(dot(H, V), 0.0f), F0);
 		vec3 numerator = NDF * G * F;
 		float denominator = 4.0f * max(dot(N, V), 0.0f) * max(dot(N, L), 0.0f);
