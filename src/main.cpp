@@ -261,8 +261,11 @@ int main() {
 		glClearColor(0.2f, 0.3f, 0.4f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);  
 		
-		glfwGetFramebufferSize(window, &width, &height);
-		glViewport(0, 0, width, height);
+		// Prevent dividing aspect ratio dividing by zero error when minimized
+		if (!glfwGetWindowAttrib(window, GLFW_ICONIFIED)) {
+			glfwGetFramebufferSize(window, &width, &height);
+			glViewport(0, 0, width, height);
+		}
 		
 		if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT)) {
 			glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
