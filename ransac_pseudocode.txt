@@ -1,6 +1,4 @@
-vec3[] vertices
-int sampleCount = 3
-int iterations
+int sampleCount = 3, iterations = 1;
 float thresholdDistance
 float inlierRatio
 

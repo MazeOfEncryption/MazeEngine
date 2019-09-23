@@ -20,19 +20,28 @@ void keyEvent(GLFWwindow* window, int key, int scancode, int action, int mods) {
 	if (key == GLFW_KEY_W && action == GLFW_PRESS && (mods >> 1) & 1) glfwSetWindowShouldClose(window, GLFW_TRUE);
 	if (key == GLFW_KEY_R && action == GLFW_PRESS) reloadShaders = true;
 }
-unsigned a_vertices, a_normals, u_worldMatrix, u_rotation, u_camera, u_view;
+unsigned u_worldMatrix, u_rotation, u_camera, u_view;
 void getLocations(int *shaderProgram) {
-	a_vertices = glGetAttribLocation(*shaderProgram, "a_vertices");
-	a_normals = glGetAttribLocation(*shaderProgram, "a_normals");
 	u_worldMatrix = glGetUniformLocation(*shaderProgram, "u_worldMatrix");
 	u_rotation = glGetUniformLocation(*shaderProgram, "u_rotation");
 	u_camera = glGetUniformLocation(*shaderProgram, "u_camera");
 	u_view = glGetUniformLocation(*shaderProgram, "u_view");
 }
+unsigned vectorFloatBuffer (std::vector<float> *vector, int *shaderProgram, std::string location) {
+	unsigned buffer;
+	glGenBuffers(1, &buffer);
+	glBindBuffer(GL_ARRAY_BUFFER, buffer);
+	glBufferData(GL_ARRAY_BUFFER, vector->size() * sizeof(float), vector->data(), GL_STATIC_DRAW);
+	unsigned a_location = glGetAttribLocation(*shaderProgram, location.c_str());
+	glVertexAttribPointer(a_location, 3, GL_FLOAT, GL_FALSE, 0, 0);
+	glEnableVertexAttribArray(a_location);
+	return buffer;
+}
 int main() {
 	std::vector<float> vertices, normals;
 	// readStl("./meshes/object2.stl", &vertices, &normals);
 	readPly("./meshes/object6.ply", &vertices, &normals);
+	
 	glfwInit();
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
@@ -42,10 +51,9 @@ int main() {
 	// glfwWindowHint(GLFW_MAXIMIZED, true);
 	GLFWwindow* window = glfwCreateWindow(800, 600, "MazeEngine", NULL, NULL);
 	glfwMakeContextCurrent(window);
-	glewInit();
-	
 	glfwSetWindowFocusCallback(window, windowFocus);
 	glfwSetKeyCallback(window, keyEvent);
+	glewInit();
 	
 	int shaderProgram = compileShaders();
 	
@@ -53,49 +61,41 @@ int main() {
 	glGenVertexArrays(1, &vao);
 	glBindVertexArray(vao);
 	
-	unsigned vertexBuffer;
-	glGenBuffers(1, &vertexBuffer);
-	glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
-	glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(float), vertices.data(), GL_STATIC_DRAW);
+	unsigned vertexBuffer = vectorFloatBuffer(&vertices, &shaderProgram, "a_vertices");
+	unsigned normalBuffer = vectorFloatBuffer(&normals, &shaderProgram, "a_normals");
 	
-	unsigned normalBuffer;
-	glGenBuffers(1, &normalBuffer);
-	glBindBuffer(GL_ARRAY_BUFFER, normalBuffer);
-	glBufferData(GL_ARRAY_BUFFER, normals.size() * sizeof(float), normals.data(), GL_STATIC_DRAW);
+	unsigned vao2;
+	glGenVertexArrays(1, &vao2);
+	glBindVertexArray(vao2);
+	
+	glm::vec3 a(1.0f, 0.0f, 1.0f);
+	glm::vec3 b(0.0f, 0.1f, 0.0f);
+	glm::vec3 c(0.0f, 0.0f, 1.0f);
+	glm::vec3 dir = glm::cross(a - b, c - b);
+	float intercept = -glm::dot(dir, a);
+	float y1 = (-dir.x * (-1.0f) - dir.z * (-1.0f) - intercept) / dir.y;
+	float y2 = (-dir.x * (-1.0f) - dir.z * ( 1.0f) - intercept) / dir.y;
+	float y3 = (-dir.x * ( 1.0f) - dir.z * (-1.0f) - intercept) / dir.y;
+	float y4 = (-dir.x * ( 1.0f) - dir.z * ( 1.0f) - intercept) / dir.y;
+	std::vector<float> vertices2 = {-1.0f, y1, -1.0f, -1.0f, y2, 1.0f, 1.0f, y3, -1.0f, -1.0f, y2, 1.0f, 1.0f, y3, -1.0f, 1.0f, y4, 1.0f};
+	unsigned vertexBuffer2 = vectorFloatBuffer(&vertices2, &shaderProgram, "a_vertices");
 	
 	std::cout << read("./todo.txt") << std::endl;
 	
 	getLocations(&shaderProgram);
 	
-	glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
-	glVertexAttribPointer(a_vertices, 3, GL_FLOAT, GL_FALSE, 0, 0);
-	glEnableVertexAttribArray(a_vertices);
-	
-	glBindBuffer(GL_ARRAY_BUFFER, normalBuffer);
-	glVertexAttribPointer(a_normals, 3, GL_FLOAT, GL_FALSE, 0, 0);
-	glEnableVertexAttribArray(a_normals);
-	
-	glm::mat4 projection;
-	glm::mat4 view;
-	
+	glm::mat4 projection, view;
 	glm::vec3 camera = glm::vec3(0.0f, 1.0f, 1.0f);
 	glm::vec3 target;
 	glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f);
-	glm::mat4 rotationX;
-	glm::mat4 rotationY;
-	glm::mat4 rotation;
-	glm::mat4 worldMatrix;
+	glm::mat4 rotationX, rotationY, rotation, worldMatrix;
 	
-	double lastX, lastY;
-	double posX, posY;
-	double deltaX, deltaY;
-	float angleX = 0.0f, angleY = 220.0f;
-	float locX = 0.0f, locY = 0.0f;
+	double lastX, lastY, posX, posY, deltaX, deltaY;
+	float angleX = 0.0f, angleY = 220.0f, locX = 0.0f, locY = 0.0f, max = 3.0f, acc = 0.5f, dec = 0.5f;
+	float fps = 0.0f, fpsSmoothing = 0.99f, dt = 0.0f, radiansX, radiansY;
 	std::vector<float> speed {0.0f, 0.0f, 0.0f, 0.0f};
-	float max = 3.0f, acc = 0.5f, dec = 0.5f;
 	int width, height;
-	float fps = 0.0f, fpsSmoothing = 0.99f, dt = 0.0f;
-	float radiansX, radiansY;
+	
 	glfwGetCursorPos(window, &lastX, &lastY);
 	
 	glEnable(GL_DEPTH_TEST);
@@ -178,6 +178,8 @@ int main() {
 		
 		glBindVertexArray(vao);
 		glDrawArrays(GL_POINTS, 0, vertices.size() / 3);
+		glBindVertexArray(vao2);
+		glDrawArrays(GL_TRIANGLES, 0, vertices2.size() / 3);
 		
 		glfwSwapBuffers(window);
 		// glFlush();
