@@ -1,15 +1,4 @@
 #include "main.hpp"
-// Function to read a file into a string
-std::string read(std::string file) {
-	std::ifstream in (file);
-	if (in.fail()) {
-		std::cout << "ERROR::IFSTREAM::FAIL" << std::endl;
-		return "";
-	}
-	std::stringstream stream;
-	stream << in.rdbuf();
-	return stream.str();
-}
 // Function for finding the index of an element in a vector
 template <typename type>
 int indexOf (type element, std::vector<type> array) {
@@ -31,57 +20,6 @@ void keyEvent(GLFWwindow* window, int key, int scancode, int action, int mods) {
 	if (key == GLFW_KEY_W && action == GLFW_PRESS && (mods >> 1) & 1) glfwSetWindowShouldClose(window, GLFW_TRUE);
 	if (key == GLFW_KEY_R && action == GLFW_PRESS) reloadShaders = true;
 }
-int compileShaders() {
-	std::string vertexShaderCode = read("./shaders/vert.glsl");
-	std::string fragmentShaderCode = read("./shaders/frag.glsl");
-	
-	const char * vertexShaderSource = vertexShaderCode.c_str();
-	const char * fragmentShaderSource = fragmentShaderCode.c_str();
-	
-	int success;
-	char infoLog[512];
-	
-	int vertexShader = glCreateShader(GL_VERTEX_SHADER);
-	glShaderSource(vertexShader, 1, &vertexShaderSource, NULL);
-	glCompileShader(vertexShader);
-	// Shader Error Logging
-	glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &success);
-	if (!success) {
-		glGetShaderInfoLog(vertexShader, 512, NULL, infoLog);
-		std::cout << "ERROR::SHADER::VERTEX::COMPILATION_FAILED\n" << infoLog << std::endl;
-	}
-	
-	int fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
-	glShaderSource(fragmentShader, 1, &fragmentShaderSource, NULL);
-	glCompileShader(fragmentShader);	
-	// Shader Error Logging
-	glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &success);
-	if (!success) {
-		glGetShaderInfoLog(fragmentShader, 512, NULL, infoLog);
-		std::cout << "ERROR::SHADER::FRAGMENT::COMPILATION_FAILED\n" << infoLog << std::endl;
-	}
-	
-	int shaderProgram = glCreateProgram();
-	glAttachShader(shaderProgram, vertexShader);
-	glAttachShader(shaderProgram, fragmentShader);
-	glLinkProgram(shaderProgram);
-	// Shader Error Logging
-	glGetProgramiv(shaderProgram, GL_LINK_STATUS, &success);
-	if (!success) {
-		glGetProgramInfoLog(shaderProgram, 512, NULL, infoLog);
-		std::cout << "ERROR::SHADER::PROGRAM::LINKING_FAILED\n" << infoLog << std::endl;
-	}
-	
-	glDeleteShader(vertexShader);
-	glDeleteShader(fragmentShader);
-	
-	return shaderProgram;
-}
-void recompileShaders (int *program) {
-	glDeleteProgram(*program);
-	*program = compileShaders();
-	std::cout << "Reloaded Shaders." << std::endl;
-}
 unsigned a_vertices, a_normals, u_worldMatrix, u_rotation, u_camera, u_view;
 void getLocations(int *shaderProgram) {
 	a_vertices = glGetAttribLocation(*shaderProgram, "a_vertices");
@@ -91,102 +29,16 @@ void getLocations(int *shaderProgram) {
 	u_camera = glGetUniformLocation(*shaderProgram, "u_camera");
 	u_view = glGetUniformLocation(*shaderProgram, "u_view");
 }
-// Function for copying bytes from a string to some type t
-template <typename type>
-type stringBytes (std::string input) {
-	type output;
-	const char *bytes = input.c_str();
-	memcpy(&output, bytes, sizeof(type));
-	return output;
-}
-void readStl(std::string file, std::vector<float> *vertices, std::vector<float> *normals) {
-	std::string object = read(file);
-	std::string header = object.substr(0, 80);
-	std::cout << "Header: " << header << std::endl;
-	std::string lengthString = object.substr(80, 4);
-	unsigned length = stringBytes<unsigned>(lengthString);
-	std::cout << "Length: " << length << std::endl;
-	int position = 84;
-	float newNormals[3];
-	for (unsigned x = 0; x < length; x++) {
-		memset(newNormals, 0, sizeof(newNormals));
-		for (int y = 0; y < 3; y++) {
-			std::string normalString = object.substr(position, sizeof(float));
-			position += sizeof(float);
-			float normal = stringBytes<float>(normalString);
-			newNormals[y] = normal;
-		}
-		for (int y = 0; y < 3; y++) normals->insert(normals->end(), std::begin(newNormals), std::end(newNormals));
-		for (int y = 0; y < 9; y++) {
-			std::string vertexString = object.substr(position, sizeof(float));
-			position += sizeof(float);
-			float vertex = stringBytes<float>(vertexString);
-			vertices->push_back(vertex);
-		}
-		position += 2;
-	}
-}
-typedef struct {
-	float x, y, z;
-} tuple;
-typedef struct {
-	tuple vertex, normal;
-} point;
-void readPly (std::string file, std::vector<float> *vertices, std::vector<float> *normals) {
-	std::ifstream in(file);
-	std::string block;
-	int pointCount;
-	int faceCount;
-	std::vector<point> points;
-	while (in >> block) {
-		if (block == "element") {
-			in >> block;
-			if (block == "vertex") {
-				in >> block;
-				pointCount = stoi(block);
-			}
-			if (block == "face") {
-				in >> block;
-				faceCount = stoi(block);
-			}
-		}
-		if (block == "end_header") break;
-	}
-	for (int i = 0; i < pointCount; i++) {
-		point point;
-		in >> point.vertex.x >> point.vertex.y >> point.vertex.z >> point.normal.x >> point.normal.y >> point.normal.z;
-		points.push_back(point);
-	}
-	for (int i = 0; i < faceCount * 4; i++) {
-		if (!(i % 4)) {
-			in >> block;
-			if (stoi(block) != 3) {
-				std::cout << "ERROR::PLY::NGON" << std::endl;
-			}
-		} else {
-			in >> block;
-			point point = points[stoi(block)];
-			vertices->push_back(point.vertex.x);
-			vertices->push_back(point.vertex.y);
-			vertices->push_back(point.vertex.z);
-			normals->push_back(point.normal.x);
-			normals->push_back(point.normal.y);
-			normals->push_back(point.normal.z);
-		}
-	}
-	std::cout << points.size() << std::endl;
-	std::cout << "Points: " << pointCount << std::endl;
-	std::cout << "Faces: " << faceCount << std::endl;
-}
 int main() {
 	std::vector<float> vertices, normals;
 	// readStl("./meshes/object2.stl", &vertices, &normals);
-	readPly("./meshes/object5.ply", &vertices, &normals);
+	readPly("./meshes/object6.ply", &vertices, &normals);
 	glfwInit();
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 	glfwWindowHint(GLFW_SAMPLES, 8);
+	// glfwWindowHint(GLFW_DOUBLEBUFFER, GL_FALSE);
 	// glfwWindowHint(GLFW_MAXIMIZED, true);
 	GLFWwindow* window = glfwCreateWindow(800, 600, "MazeEngine", NULL, NULL);
 	glfwMakeContextCurrent(window);
@@ -242,7 +94,7 @@ int main() {
 	std::vector<float> speed {0.0f, 0.0f, 0.0f, 0.0f};
 	float max = 3.0f, acc = 0.5f, dec = 0.5f;
 	int width, height;
-	float fps = 0.0f, dt = 0.0f;
+	float fps = 0.0f, fpsSmoothing = 0.99f, dt = 0.0f;
 	float radiansX, radiansY;
 	glfwGetCursorPos(window, &lastX, &lastY);
 	
@@ -325,13 +177,14 @@ int main() {
 		glUniform3fv(u_camera, 1, glm::value_ptr(camera));
 		
 		glBindVertexArray(vao);
-		glDrawArrays(GL_TRIANGLES, 0, vertices.size() / 3);
+		glDrawArrays(GL_POINTS, 0, vertices.size() / 3);
 		
 		glfwSwapBuffers(window);
+		// glFlush();
 		glfwPollEvents();
 		
 		dt = glfwGetTime() - t;
-		fps = 1.0f / dt;
+		fps = (1.0f / dt) * fpsSmoothing + fps * (1.0f - fpsSmoothing);
 		
 		std::ostringstream oss;
 		oss << "MazeEngine --- FPS: " << fps << " DT: " << dt;

@@ -13,6 +13,7 @@ main: $(OBJ)
 	mkdir -p build
 	cp ./lib/glew-2.1.0/bin/Release/x64/glew32.dll ./build/glew32.dll
 	cp -r ./shaders/ ./build/
+	cp -r ./meshes/ ./build/
 	cp ./todo.txt ./build/todo.txt
 	$(CC) $(CFLAGS) $^ $(LDFLAGS) -o ./build/$@
 	./build/$@

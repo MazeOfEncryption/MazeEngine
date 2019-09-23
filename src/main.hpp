@@ -12,3 +12,8 @@
 #include <sstream>
 #include <algorithm>
 #include <iterator>
+std::string read(std::string file);
+void readStl (std::string file, std::vector<float> *vertices, std::vector<float> *normals);
+void readPly (std::string file, std::vector<float> *vertices, std::vector<float> *normals);
+int compileShaders();
+void recompileShaders (int *program);
