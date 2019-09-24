@@ -37,6 +37,21 @@ unsigned vectorFloatBuffer (std::vector<float> *vector, int *shaderProgram, std:
 	glEnableVertexAttribArray(a_location);
 	return buffer;
 }
+typedef struct plane {
+	glm::vec4 normal;
+	plane (glm::vec3 a, glm::vec3 b, glm::vec3 c) {
+		normal = glm::vec4(glm::cross(a - b, c - b), -glm::dot(glm::cross(a - b, c - b), a));
+	}
+	float getX (float y, float z) {
+		return (-normal.y * y - normal.z * z - normal.w) / normal.x;
+	}
+	float getY (float x, float z) {
+		return (-normal.x * x - normal.z * z - normal.w) / normal.y;
+	}
+	float getZ (float x, float y) {
+		return (-normal.x * x - normal.y * y - normal.w) / normal.z;
+	}
+} plane;
 int main() {
 	std::vector<float> vertices, normals;
 	// readStl("./meshes/object2.stl", &vertices, &normals);
@@ -71,12 +86,11 @@ int main() {
 	glm::vec3 a(1.0f, 0.0f, 1.0f);
 	glm::vec3 b(0.0f, 0.1f, 0.0f);
 	glm::vec3 c(0.0f, 0.0f, 1.0f);
-	glm::vec3 dir = glm::cross(a - b, c - b);
-	float intercept = -glm::dot(dir, a);
-	float y1 = (-dir.x * (-1.0f) - dir.z * (-1.0f) - intercept) / dir.y;
-	float y2 = (-dir.x * (-1.0f) - dir.z * ( 1.0f) - intercept) / dir.y;
-	float y3 = (-dir.x * ( 1.0f) - dir.z * (-1.0f) - intercept) / dir.y;
-	float y4 = (-dir.x * ( 1.0f) - dir.z * ( 1.0f) - intercept) / dir.y;
+	plane p(a, b, c);
+	float y1 = p.getY(-1.0f, -1.0f);
+	float y2 = p.getY(-1.0f,  1.0f);
+	float y3 = p.getY( 1.0f, -1.0f);
+	float y4 = p.getY( 1.0f,  1.0f);
 	std::vector<float> vertices2 = {-1.0f, y1, -1.0f, -1.0f, y2, 1.0f, 1.0f, y3, -1.0f, -1.0f, y2, 1.0f, 1.0f, y3, -1.0f, 1.0f, y4, 1.0f};
 	unsigned vertexBuffer2 = vectorFloatBuffer(&vertices2, &shaderProgram, "a_vertices");
 	
