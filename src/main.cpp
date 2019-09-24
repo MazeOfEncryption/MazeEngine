@@ -40,7 +40,10 @@ unsigned vectorFloatBuffer (std::vector<float> *vector, int *shaderProgram, std:
 typedef struct plane {
 	glm::vec4 normal;
 	plane (glm::vec3 a, glm::vec3 b, glm::vec3 c) {
-		normal = glm::vec4(glm::cross(a - b, c - b), -glm::dot(glm::cross(a - b, c - b), a));
+		normal = glm::vec4(glm::normalize(glm::cross(a - b, c - b)), -glm::dot(glm::cross(a - b, c - b), a));
+	}
+	float distance (glm::vec3 point) {
+		return abs(normal.x * point.x + normal.y * point.y + normal.z * point.z + normal.w);
 	}
 	float getX (float y, float z) {
 		return (-normal.y * y - normal.z * z - normal.w) / normal.x;
