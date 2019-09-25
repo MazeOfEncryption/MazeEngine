@@ -82,20 +82,20 @@ int main() {
 	unsigned vertexBuffer = vectorFloatBuffer(&vertices, &shaderProgram, "a_vertices");
 	unsigned normalBuffer = vectorFloatBuffer(&normals, &shaderProgram, "a_normals");
 	
-	unsigned vao2;
-	glGenVertexArrays(1, &vao2);
-	glBindVertexArray(vao2);
+	// unsigned vao2;
+	// glGenVertexArrays(1, &vao2);
+	// glBindVertexArray(vao2);
 	
-	glm::vec3 a(1.0f, 0.0f, 1.0f);
-	glm::vec3 b(0.0f, 0.1f, 0.0f);
-	glm::vec3 c(0.0f, 0.0f, 1.0f);
-	plane p(a, b, c);
-	float y1 = p.getY(-1.0f, -1.0f);
-	float y2 = p.getY(-1.0f,  1.0f);
-	float y3 = p.getY( 1.0f, -1.0f);
-	float y4 = p.getY( 1.0f,  1.0f);
-	std::vector<float> vertices2 = {-1.0f, y1, -1.0f, -1.0f, y2, 1.0f, 1.0f, y3, -1.0f, -1.0f, y2, 1.0f, 1.0f, y3, -1.0f, 1.0f, y4, 1.0f};
-	unsigned vertexBuffer2 = vectorFloatBuffer(&vertices2, &shaderProgram, "a_vertices");
+	// glm::vec3 a(1.0f, 0.0f, 1.0f);
+	// glm::vec3 b(0.0f, 0.1f, 0.0f);
+	// glm::vec3 c(0.0f, 0.0f, 1.0f);
+	// plane p(a, b, c);
+	// float y1 = p.getY(-1.0f, -1.0f);
+	// float y2 = p.getY(-1.0f,  1.0f);
+	// float y3 = p.getY( 1.0f, -1.0f);
+	// float y4 = p.getY( 1.0f,  1.0f);
+	// std::vector<float> vertices2 = {-1.0f, y1, -1.0f, -1.0f, y2, 1.0f, 1.0f, y3, -1.0f, -1.0f, y2, 1.0f, 1.0f, y3, -1.0f, 1.0f, y4, 1.0f};
+	// unsigned vertexBuffer2 = vectorFloatBuffer(&vertices2, &shaderProgram, "a_vertices");
 	
 	std::cout << read("./todo.txt") << std::endl;
 	
@@ -194,9 +194,9 @@ int main() {
 		glUniform3fv(u_camera, 1, glm::value_ptr(camera));
 		
 		glBindVertexArray(vao);
-		glDrawArrays(GL_POINTS, 0, vertices.size() / 3);
-		glBindVertexArray(vao2);
-		glDrawArrays(GL_TRIANGLES, 0, vertices2.size() / 3);
+		glDrawArrays(GL_TRIANGLES, 0, vertices.size() / 3);
+		// glBindVertexArray(vao2);
+		// glDrawArrays(GL_TRIANGLES, 0, vertices2.size() / 3);
 		
 		glfwSwapBuffers(window);
 		// glFlush();
