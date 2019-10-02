@@ -56,9 +56,32 @@ typedef struct plane {
 	}
 } plane;
 int main() {
-	std::vector<float> vertices, normals;
+	std::vector<float> vertices {
+		-1.0f, -1.0f,  0.0f,
+		-1.0f,  1.0f,  0.0f,
+		 1.0f, -1.0f,  0.0f,
+		-1.0f,  1.0f,  0.0f,
+		 1.0f, -1.0f,  0.0f,
+		 1.0f,  1.0f,  0.0f,
+	};
+	std::vector<float> normals {
+		0.0f, 0.0f, 1.0f,
+		0.0f, 0.0f, 1.0f,
+		0.0f, 0.0f, 1.0f,
+		0.0f, 0.0f, 1.0f,
+		0.0f, 0.0f, 1.0f,
+		0.0f, 0.0f, 1.0f,
+	};
+	std::vector<float> UV {
+		0.0f, 0.0f, 0.0f,
+		0.0f, 1.0f, 0.0f,
+		1.0f, 0.0f, 0.0f,
+		0.0f, 1.0f, 0.0f,
+		1.0f, 0.0f, 0.0f,
+		1.0f, 1.0f, 0.0f,
+	};
 	// readStl("./meshes/object2.stl", &vertices, &normals);
-	readPly("./meshes/object6.ply", &vertices, &normals);
+	// readPly("./meshes/object6.ply", &vertices, &normals);
 	
 	glfwInit();
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
@@ -73,6 +96,8 @@ int main() {
 	glfwSetKeyCallback(window, keyEvent);
 	glewInit();
 	
+	glEnable(GL_DEBUG_OUTPUT);
+	
 	int shaderProgram = compileShaders();
 	
 	unsigned vao;
@@ -81,7 +106,7 @@ int main() {
 	
 	unsigned vertexBuffer = vectorFloatBuffer(&vertices, &shaderProgram, "a_vertices");
 	unsigned normalBuffer = vectorFloatBuffer(&normals, &shaderProgram, "a_normals");
-	
+	unsigned uvBuffer = vectorFloatBuffer(&UV, &shaderProgram, "a_UV");
 	// unsigned vao2;
 	// glGenVertexArrays(1, &vao2);
 	// glBindVertexArray(vao2);
@@ -97,7 +122,22 @@ int main() {
 	// std::vector<float> vertices2 = {-1.0f, y1, -1.0f, -1.0f, y2, 1.0f, 1.0f, y3, -1.0f, -1.0f, y2, 1.0f, 1.0f, y3, -1.0f, 1.0f, y4, 1.0f};
 	// unsigned vertexBuffer2 = vectorFloatBuffer(&vertices2, &shaderProgram, "a_vertices");
 	
-	std::cout << read("./todo.txt") << std::endl;
+	std::string name = "./image.tiff";
+	const char *path = name.c_str();
+	FREE_IMAGE_FORMAT fif = FreeImage_GetFileType(path, 0);	
+	FIBITMAP *image = FreeImage_Load(fif, path, BMP_DEFAULT);
+	unsigned char *bits = FreeImage_GetBits(image);
+	unsigned imageWidth = FreeImage_GetWidth(image);
+	unsigned imageHeight = FreeImage_GetHeight(image);
+	std::cout << "Width: " << imageWidth << ", Height: " << imageHeight << std::endl;
+	unsigned gl_texID;
+	glGenTextures(1, &gl_texID);
+	glBindTexture(GL_TEXTURE_2D, gl_texID);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_R32F, imageWidth, imageHeight, 0, GL_DEPTH_COMPONENT32, GL_UNSIGNED_BYTE, bits);
+	// FreeImage_Unload(image);
+	// std::cout << read("./todo.txt") << std::endl;
 	
 	getLocations(&shaderProgram);
 	
@@ -176,8 +216,8 @@ int main() {
 			// Compute direction
 			float dir = x < 2 ? -1 : 1;
 			// Add speed in direction in dt
-			camera.x -= speed[x] * sin(angle) * dir * dt;
-			camera.z += speed[x] * cos(angle) * dir * dt;
+			// camera.x -= speed[x] * sin(angle) * dir * dt;
+			// camera.z += speed[x] * cos(angle) * dir * dt;
 		}
 		
 		projection = glm::perspective(glm::radians(90.0f), (float) width / (float) height, 0.1f, 50.0f);
@@ -187,6 +227,7 @@ int main() {
 		target = glm::vec3(rotation * glm::vec4(0.0f, 0.0f, 1.0f, 1.0f));
 		view = glm::lookAt(camera, camera + target,	up);
 		worldMatrix = projection * view;
+		worldMatrix = glm::mat4(1.0f);
 		
 		glUniformMatrix4fv(u_worldMatrix, 1, GL_FALSE, glm::value_ptr(worldMatrix));
 		glUniformMatrix4fv(u_rotation, 1, GL_FALSE, glm::value_ptr(rotation));

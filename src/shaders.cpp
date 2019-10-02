@@ -1,7 +1,7 @@
 #include "main.hpp"
 int compileShaders() {
 	std::string vertexShaderCode = read("./shaders/vert.glsl");
-	std::string fragmentShaderCode = read("./shaders/frag.glsl");
+	std::string fragmentShaderCode = read("./shaders/image.glsl");
 	
 	const char * vertexShaderSource = vertexShaderCode.c_str();
 	const char * fragmentShaderSource = fragmentShaderCode.c_str();

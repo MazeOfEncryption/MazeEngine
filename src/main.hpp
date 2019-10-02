@@ -12,6 +12,7 @@
 #include <sstream>
 #include <algorithm>
 #include <iterator>
+#include <FreeImage.h>
 std::string read(std::string file);
 void readStl (std::string file, std::vector<float> *vertices, std::vector<float> *normals);
 void readPly (std::string file, std::vector<float> *vertices, std::vector<float> *normals);
