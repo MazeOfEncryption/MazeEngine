@@ -88,6 +88,7 @@ int main() {
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 	glfwWindowHint(GLFW_SAMPLES, 8);
+	glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GL_TRUE);
 	// glfwWindowHint(GLFW_DOUBLEBUFFER, GL_FALSE);
 	// glfwWindowHint(GLFW_MAXIMIZED, true);
 	GLFWwindow* window = glfwCreateWindow(800, 600, "MazeEngine", NULL, NULL);
@@ -124,19 +125,21 @@ int main() {
 	
 	std::string name = "./image.tiff";
 	const char *path = name.c_str();
-	FREE_IMAGE_FORMAT fif = FreeImage_GetFileType(path, 0);	
+	FREE_IMAGE_FORMAT fif = FreeImage_GetFileType(path, 0);
 	FIBITMAP *image = FreeImage_Load(fif, path, BMP_DEFAULT);
 	unsigned char *bits = FreeImage_GetBits(image);
 	unsigned imageWidth = FreeImage_GetWidth(image);
 	unsigned imageHeight = FreeImage_GetHeight(image);
-	std::cout << "Width: " << imageWidth << ", Height: " << imageHeight << std::endl;
+	unsigned bpp = FreeImage_GetBPP(image);
+	std::cout << "Width: " << imageWidth << ", Height: " << imageHeight << ", BPP: " << bpp << std::endl;
 	unsigned gl_texID;
 	glGenTextures(1, &gl_texID);
 	glBindTexture(GL_TEXTURE_2D, gl_texID);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_R32F, imageWidth, imageHeight, 0, GL_DEPTH_COMPONENT32, GL_UNSIGNED_BYTE, bits);
-	// FreeImage_Unload(image);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT32, imageWidth, imageHeight, 0, GL_DEPTH_COMPONENT, GL_FLOAT, bits);
+	FreeImage_Unload(image);
+	
 	// std::cout << read("./todo.txt") << std::endl;
 	
 	getLocations(&shaderProgram);
