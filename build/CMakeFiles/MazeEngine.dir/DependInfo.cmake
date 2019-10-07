@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "C:/David/Programming/Github/MazeEngine/main.cpp" "C:/David/Programming/Github/MazeEngine/build/CMakeFiles/MazeEngine.dir/main.cpp.obj"
+  "C:/David/Programming/Github/MazeEngine/src/main.cpp" "C:/David/Programming/Github/MazeEngine/build/CMakeFiles/MazeEngine.dir/src/main.cpp.obj"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

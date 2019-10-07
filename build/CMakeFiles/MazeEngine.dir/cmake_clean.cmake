@@ -1,5 +1,5 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/MazeEngine.dir/main.cpp.obj"
+  "CMakeFiles/MazeEngine.dir/src/main.cpp.obj"
   "MazeEngine.pdb"
   "MazeEngine.exe"
   "MazeEngine.exe.manifest"

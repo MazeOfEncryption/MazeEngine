@@ -57,27 +57,27 @@ include CMakeFiles/MazeEngine.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/MazeEngine.dir/flags.make
 
-CMakeFiles/MazeEngine.dir/main.cpp.obj: CMakeFiles/MazeEngine.dir/flags.make
-CMakeFiles/MazeEngine.dir/main.cpp.obj: ../main.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:/David/Programming/Github/MazeEngine/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/MazeEngine.dir/main.cpp.obj"
-	cd C:/David/Programming/Github/MazeEngine/build && C:/dev/msys64/mingw64/bin/g++.exe  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/MazeEngine.dir/main.cpp.obj -c C:/David/Programming/Github/MazeEngine/main.cpp
+CMakeFiles/MazeEngine.dir/src/main.cpp.obj: CMakeFiles/MazeEngine.dir/flags.make
+CMakeFiles/MazeEngine.dir/src/main.cpp.obj: ../src/main.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:/David/Programming/Github/MazeEngine/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/MazeEngine.dir/src/main.cpp.obj"
+	cd C:/David/Programming/Github/MazeEngine/build && C:/dev/msys64/mingw64/bin/g++.exe  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/MazeEngine.dir/src/main.cpp.obj -c C:/David/Programming/Github/MazeEngine/src/main.cpp
 
-CMakeFiles/MazeEngine.dir/main.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/MazeEngine.dir/main.cpp.i"
-	cd C:/David/Programming/Github/MazeEngine/build && C:/dev/msys64/mingw64/bin/g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:/David/Programming/Github/MazeEngine/main.cpp > CMakeFiles/MazeEngine.dir/main.cpp.i
+CMakeFiles/MazeEngine.dir/src/main.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/MazeEngine.dir/src/main.cpp.i"
+	cd C:/David/Programming/Github/MazeEngine/build && C:/dev/msys64/mingw64/bin/g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:/David/Programming/Github/MazeEngine/src/main.cpp > CMakeFiles/MazeEngine.dir/src/main.cpp.i
 
-CMakeFiles/MazeEngine.dir/main.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/MazeEngine.dir/main.cpp.s"
-	cd C:/David/Programming/Github/MazeEngine/build && C:/dev/msys64/mingw64/bin/g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:/David/Programming/Github/MazeEngine/main.cpp -o CMakeFiles/MazeEngine.dir/main.cpp.s
+CMakeFiles/MazeEngine.dir/src/main.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/MazeEngine.dir/src/main.cpp.s"
+	cd C:/David/Programming/Github/MazeEngine/build && C:/dev/msys64/mingw64/bin/g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:/David/Programming/Github/MazeEngine/src/main.cpp -o CMakeFiles/MazeEngine.dir/src/main.cpp.s
 
 # Object files for target MazeEngine
 MazeEngine_OBJECTS = \
-"CMakeFiles/MazeEngine.dir/main.cpp.obj"
+"CMakeFiles/MazeEngine.dir/src/main.cpp.obj"
 
 # External object files for target MazeEngine
 MazeEngine_EXTERNAL_OBJECTS =
 
-MazeEngine.exe: CMakeFiles/MazeEngine.dir/main.cpp.obj
+MazeEngine.exe: CMakeFiles/MazeEngine.dir/src/main.cpp.obj
 MazeEngine.exe: CMakeFiles/MazeEngine.dir/build.make
 MazeEngine.exe: CMakeFiles/MazeEngine.dir/linklibs.rsp
 MazeEngine.exe: CMakeFiles/MazeEngine.dir/objects1.rsp

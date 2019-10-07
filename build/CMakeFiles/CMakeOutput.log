@@ -755,3 +755,125 @@ make[1]: Leaving directory '/c/David/Programming/Github/MazeEngine/build/CMakeFi
     Feature record: CXX_FEATURE:0cxx_variable_templates
     Feature record: CXX_FEATURE:0cxx_variadic_macros
     Feature record: CXX_FEATURE:0cxx_variadic_templates
+Determining if the include file pthread.h exists passed with the following output:
+Change Dir: c:/David/Programming/Github/MazeEngine/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"C:/dev/msys64/usr/bin/make.exe" "cmTC_c3fef/fast"
+/usr/bin/make -f CMakeFiles/cmTC_c3fef.dir/build.make CMakeFiles/cmTC_c3fef.dir/build
+make[1]: Entering directory '/c/David/Programming/Github/MazeEngine/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_c3fef.dir/CheckIncludeFile.c.obj
+cd C:/David/Programming/Github/MazeEngine/build/CMakeFiles/CMakeTmp && C:/dev/msys64/mingw64/bin/gcc.exe    -o CMakeFiles/cmTC_c3fef.dir/CheckIncludeFile.c.obj   -c C:/David/Programming/Github/MazeEngine/build/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+Linking C executable cmTC_c3fef.exe
+cd C:/David/Programming/Github/MazeEngine/build/CMakeFiles/CMakeTmp && C:/dev/msys64/mingw64/bin/cmake.exe -E remove -f CMakeFiles/cmTC_c3fef.dir/objects.a
+cd C:/David/Programming/Github/MazeEngine/build/CMakeFiles/CMakeTmp && C:/dev/msys64/mingw64/bin/ar.exe cr CMakeFiles/cmTC_c3fef.dir/objects.a @CMakeFiles/cmTC_c3fef.dir/objects1.rsp
+cd C:/David/Programming/Github/MazeEngine/build/CMakeFiles/CMakeTmp && C:/dev/msys64/mingw64/bin/gcc.exe      -Wl,--whole-archive CMakeFiles/cmTC_c3fef.dir/objects.a -Wl,--no-whole-archive  -o cmTC_c3fef.exe -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles/cmTC_c3fef.dir/linklibs.rsp
+make[1]: Leaving directory '/c/David/Programming/Github/MazeEngine/build/CMakeFiles/CMakeTmp'
+
+
+Determining if the pthread_create exist passed with the following output:
+Change Dir: c:/David/Programming/Github/MazeEngine/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"C:/dev/msys64/usr/bin/make.exe" "cmTC_29b40/fast"
+/usr/bin/make -f CMakeFiles/cmTC_29b40.dir/build.make CMakeFiles/cmTC_29b40.dir/build
+make[1]: Entering directory '/c/David/Programming/Github/MazeEngine/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_29b40.dir/CheckSymbolExists.c.obj
+cd C:/David/Programming/Github/MazeEngine/build/CMakeFiles/CMakeTmp && C:/dev/msys64/mingw64/bin/gcc.exe    -o CMakeFiles/cmTC_29b40.dir/CheckSymbolExists.c.obj   -c C:/David/Programming/Github/MazeEngine/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Linking C executable cmTC_29b40.exe
+cd C:/David/Programming/Github/MazeEngine/build/CMakeFiles/CMakeTmp && C:/dev/msys64/mingw64/bin/cmake.exe -E remove -f CMakeFiles/cmTC_29b40.dir/objects.a
+cd C:/David/Programming/Github/MazeEngine/build/CMakeFiles/CMakeTmp && C:/dev/msys64/mingw64/bin/ar.exe cr CMakeFiles/cmTC_29b40.dir/objects.a @CMakeFiles/cmTC_29b40.dir/objects1.rsp
+cd C:/David/Programming/Github/MazeEngine/build/CMakeFiles/CMakeTmp && C:/dev/msys64/mingw64/bin/gcc.exe      -Wl,--whole-archive CMakeFiles/cmTC_29b40.dir/objects.a -Wl,--no-whole-archive  -o cmTC_29b40.exe -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles/cmTC_29b40.dir/linklibs.rsp
+make[1]: Leaving directory '/c/David/Programming/Github/MazeEngine/build/CMakeFiles/CMakeTmp'
+
+File c:/David/Programming/Github/MazeEngine/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <pthread.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef pthread_create
+  return ((int*)(&pthread_create))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the include file dinput.h exists passed with the following output:
+Change Dir: c:/David/Programming/Github/MazeEngine/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"C:/dev/msys64/usr/bin/make.exe" "cmTC_f26b2/fast"
+/usr/bin/make -f CMakeFiles/cmTC_f26b2.dir/build.make CMakeFiles/cmTC_f26b2.dir/build
+make[1]: Entering directory '/c/David/Programming/Github/MazeEngine/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_f26b2.dir/CheckIncludeFile.c.obj
+cd C:/David/Programming/Github/MazeEngine/build/CMakeFiles/CMakeTmp && C:/dev/msys64/mingw64/bin/gcc.exe    -o CMakeFiles/cmTC_f26b2.dir/CheckIncludeFile.c.obj   -c C:/David/Programming/Github/MazeEngine/build/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+Linking C executable cmTC_f26b2.exe
+cd C:/David/Programming/Github/MazeEngine/build/CMakeFiles/CMakeTmp && C:/dev/msys64/mingw64/bin/cmake.exe -E remove -f CMakeFiles/cmTC_f26b2.dir/objects.a
+cd C:/David/Programming/Github/MazeEngine/build/CMakeFiles/CMakeTmp && C:/dev/msys64/mingw64/bin/ar.exe cr CMakeFiles/cmTC_f26b2.dir/objects.a @CMakeFiles/cmTC_f26b2.dir/objects1.rsp
+cd C:/David/Programming/Github/MazeEngine/build/CMakeFiles/CMakeTmp && C:/dev/msys64/mingw64/bin/gcc.exe      -Wl,--whole-archive CMakeFiles/cmTC_f26b2.dir/objects.a -Wl,--no-whole-archive  -o cmTC_f26b2.exe -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles/cmTC_f26b2.dir/linklibs.rsp
+make[1]: Leaving directory '/c/David/Programming/Github/MazeEngine/build/CMakeFiles/CMakeTmp'
+
+
+Determining if the include file xinput.h exists passed with the following output:
+Change Dir: c:/David/Programming/Github/MazeEngine/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"C:/dev/msys64/usr/bin/make.exe" "cmTC_21a90/fast"
+/usr/bin/make -f CMakeFiles/cmTC_21a90.dir/build.make CMakeFiles/cmTC_21a90.dir/build
+make[1]: Entering directory '/c/David/Programming/Github/MazeEngine/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_21a90.dir/CheckIncludeFile.c.obj
+cd C:/David/Programming/Github/MazeEngine/build/CMakeFiles/CMakeTmp && C:/dev/msys64/mingw64/bin/gcc.exe    -o CMakeFiles/cmTC_21a90.dir/CheckIncludeFile.c.obj   -c C:/David/Programming/Github/MazeEngine/build/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+Linking C executable cmTC_21a90.exe
+cd C:/David/Programming/Github/MazeEngine/build/CMakeFiles/CMakeTmp && C:/dev/msys64/mingw64/bin/cmake.exe -E remove -f CMakeFiles/cmTC_21a90.dir/objects.a
+cd C:/David/Programming/Github/MazeEngine/build/CMakeFiles/CMakeTmp && C:/dev/msys64/mingw64/bin/ar.exe cr CMakeFiles/cmTC_21a90.dir/objects.a @CMakeFiles/cmTC_21a90.dir/objects1.rsp
+cd C:/David/Programming/Github/MazeEngine/build/CMakeFiles/CMakeTmp && C:/dev/msys64/mingw64/bin/gcc.exe      -Wl,--whole-archive CMakeFiles/cmTC_21a90.dir/objects.a -Wl,--no-whole-archive  -o cmTC_21a90.exe -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles/cmTC_21a90.dir/linklibs.rsp
+make[1]: Leaving directory '/c/David/Programming/Github/MazeEngine/build/CMakeFiles/CMakeTmp'
+
+
+Performing C SOURCE FILE Test _GLFW_HAS_DEP succeeded with the following output:
+Change Dir: c:/David/Programming/Github/MazeEngine/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"C:/dev/msys64/usr/bin/make.exe" "cmTC_24eaa/fast"
+/usr/bin/make -f CMakeFiles/cmTC_24eaa.dir/build.make CMakeFiles/cmTC_24eaa.dir/build
+make[1]: Entering directory '/c/David/Programming/Github/MazeEngine/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_24eaa.dir/src.c.obj
+cd C:/David/Programming/Github/MazeEngine/build/CMakeFiles/CMakeTmp && C:/dev/msys64/mingw64/bin/gcc.exe   -D_GLFW_HAS_DEP -Wl,--nxcompat   -o CMakeFiles/cmTC_24eaa.dir/src.c.obj   -c C:/David/Programming/Github/MazeEngine/build/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_24eaa.exe
+cd C:/David/Programming/Github/MazeEngine/build/CMakeFiles/CMakeTmp && C:/dev/msys64/mingw64/bin/cmake.exe -E remove -f CMakeFiles/cmTC_24eaa.dir/objects.a
+cd C:/David/Programming/Github/MazeEngine/build/CMakeFiles/CMakeTmp && C:/dev/msys64/mingw64/bin/ar.exe cr CMakeFiles/cmTC_24eaa.dir/objects.a @CMakeFiles/cmTC_24eaa.dir/objects1.rsp
+cd C:/David/Programming/Github/MazeEngine/build/CMakeFiles/CMakeTmp && C:/dev/msys64/mingw64/bin/gcc.exe  -D_GLFW_HAS_DEP -Wl,--nxcompat    -Wl,--whole-archive CMakeFiles/cmTC_24eaa.dir/objects.a -Wl,--no-whole-archive  -o cmTC_24eaa.exe -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles/cmTC_24eaa.dir/linklibs.rsp
+make[1]: Leaving directory '/c/David/Programming/Github/MazeEngine/build/CMakeFiles/CMakeTmp'
+
+Source file was:
+int main(void) { return 0; }
+Performing C SOURCE FILE Test _GLFW_HAS_ASLR succeeded with the following output:
+Change Dir: c:/David/Programming/Github/MazeEngine/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"C:/dev/msys64/usr/bin/make.exe" "cmTC_07bed/fast"
+/usr/bin/make -f CMakeFiles/cmTC_07bed.dir/build.make CMakeFiles/cmTC_07bed.dir/build
+make[1]: Entering directory '/c/David/Programming/Github/MazeEngine/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_07bed.dir/src.c.obj
+cd C:/David/Programming/Github/MazeEngine/build/CMakeFiles/CMakeTmp && C:/dev/msys64/mingw64/bin/gcc.exe   -D_GLFW_HAS_ASLR -Wl,--dynamicbase   -o CMakeFiles/cmTC_07bed.dir/src.c.obj   -c C:/David/Programming/Github/MazeEngine/build/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_07bed.exe
+cd C:/David/Programming/Github/MazeEngine/build/CMakeFiles/CMakeTmp && C:/dev/msys64/mingw64/bin/cmake.exe -E remove -f CMakeFiles/cmTC_07bed.dir/objects.a
+cd C:/David/Programming/Github/MazeEngine/build/CMakeFiles/CMakeTmp && C:/dev/msys64/mingw64/bin/ar.exe cr CMakeFiles/cmTC_07bed.dir/objects.a @CMakeFiles/cmTC_07bed.dir/objects1.rsp
+cd C:/David/Programming/Github/MazeEngine/build/CMakeFiles/CMakeTmp && C:/dev/msys64/mingw64/bin/gcc.exe  -D_GLFW_HAS_ASLR -Wl,--dynamicbase    -Wl,--whole-archive CMakeFiles/cmTC_07bed.dir/objects.a -Wl,--no-whole-archive  -o cmTC_07bed.exe -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles/cmTC_07bed.dir/linklibs.rsp
+make[1]: Leaving directory '/c/David/Programming/Github/MazeEngine/build/CMakeFiles/CMakeTmp'
+
+Source file was:
+int main(void) { return 0; }
+Performing C SOURCE FILE Test _GLFW_HAS_64ASLR succeeded with the following output:
+Change Dir: c:/David/Programming/Github/MazeEngine/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"C:/dev/msys64/usr/bin/make.exe" "cmTC_f54f8/fast"
+/usr/bin/make -f CMakeFiles/cmTC_f54f8.dir/build.make CMakeFiles/cmTC_f54f8.dir/build
+make[1]: Entering directory '/c/David/Programming/Github/MazeEngine/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_f54f8.dir/src.c.obj
+cd C:/David/Programming/Github/MazeEngine/build/CMakeFiles/CMakeTmp && C:/dev/msys64/mingw64/bin/gcc.exe   -D_GLFW_HAS_64ASLR -Wl,--high-entropy-va   -o CMakeFiles/cmTC_f54f8.dir/src.c.obj   -c C:/David/Programming/Github/MazeEngine/build/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_f54f8.exe
+cd C:/David/Programming/Github/MazeEngine/build/CMakeFiles/CMakeTmp && C:/dev/msys64/mingw64/bin/cmake.exe -E remove -f CMakeFiles/cmTC_f54f8.dir/objects.a
+cd C:/David/Programming/Github/MazeEngine/build/CMakeFiles/CMakeTmp && C:/dev/msys64/mingw64/bin/ar.exe cr CMakeFiles/cmTC_f54f8.dir/objects.a @CMakeFiles/cmTC_f54f8.dir/objects1.rsp
+cd C:/David/Programming/Github/MazeEngine/build/CMakeFiles/CMakeTmp && C:/dev/msys64/mingw64/bin/gcc.exe  -D_GLFW_HAS_64ASLR -Wl,--high-entropy-va    -Wl,--whole-archive CMakeFiles/cmTC_f54f8.dir/objects.a -Wl,--no-whole-archive  -o cmTC_f54f8.exe -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles/cmTC_f54f8.dir/linklibs.rsp
+make[1]: Leaving directory '/c/David/Programming/Github/MazeEngine/build/CMakeFiles/CMakeTmp'
+
+Source file was:
+int main(void) { return 0; }

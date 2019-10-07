@@ -1,0 +1,42 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/David/Programming/Github/MazeEngine/src/main.cpp
+main.hpp
+C:/David/Programming/Github/MazeEngine/src/main.hpp
+
+C:/David/Programming/Github/MazeEngine/src/main.hpp
+GL/glew.h
+-
+GLFW/glfw3.h
+-
+glm.hpp
+-
+gtx/string_cast.hpp
+-
+ext.hpp
+-
+cmath
+-
+vector
+-
+string
+-
+iostream
+-
+fstream
+-
+sstream
+-
+algorithm
+-
+iterator
+-
+FreeImage.h
+-
+
