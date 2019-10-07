@@ -1,0 +1,7 @@
+[
+{
+  "directory": "C:/David/Programming/Github/MazeEngine/build",
+  "command": "C:/dev/msys64/mingw64/bin/g++.exe    -g   -o CMakeFiles/MazeEngine.dir/main.cpp.obj -c C:/David/Programming/Github/MazeEngine/main.cpp",
+  "file": "C:/David/Programming/Github/MazeEngine/main.cpp"
+}
+]
