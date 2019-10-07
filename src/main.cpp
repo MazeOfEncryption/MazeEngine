@@ -123,22 +123,22 @@ int main() {
 	// std::vector<float> vertices2 = {-1.0f, y1, -1.0f, -1.0f, y2, 1.0f, 1.0f, y3, -1.0f, -1.0f, y2, 1.0f, 1.0f, y3, -1.0f, 1.0f, y4, 1.0f};
 	// unsigned vertexBuffer2 = vectorFloatBuffer(&vertices2, &shaderProgram, "a_vertices");
 	
-	// std::string name = "./image.tiff";
-	// const char *path = name.c_str();
-	// FREE_IMAGE_FORMAT fif = FreeImage_GetFileType(path, 0);
-	// FIBITMAP *image = FreeImage_Load(fif, path, BMP_DEFAULT);
-	// unsigned char *bits = FreeImage_GetBits(image);
-	// unsigned imageWidth = FreeImage_GetWidth(image);
-	// unsigned imageHeight = FreeImage_GetHeight(image);
-	// unsigned bpp = FreeImage_GetBPP(image);
-	// std::cout << "Width: " << imageWidth << ", Height: " << imageHeight << ", BPP: " << bpp << std::endl;
-	// unsigned gl_texID;
-	// glGenTextures(1, &gl_texID);
-	// glBindTexture(GL_TEXTURE_2D, gl_texID);
-	// glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-	// glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-	// glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT32, imageWidth, imageHeight, 0, GL_DEPTH_COMPONENT, GL_FLOAT, bits);
-	// FreeImage_Unload(image);
+	std::string name = "./image.tiff";
+	const char *path = name.c_str();
+	FREE_IMAGE_FORMAT fif = FreeImage_GetFileType(path, 0);
+	FIBITMAP *image = FreeImage_Load(fif, path, BMP_DEFAULT);
+	unsigned char *bits = FreeImage_GetBits(image);
+	unsigned imageWidth = FreeImage_GetWidth(image);
+	unsigned imageHeight = FreeImage_GetHeight(image);
+	unsigned bpp = FreeImage_GetBPP(image);
+	std::cout << "Width: " << imageWidth << ", Height: " << imageHeight << ", BPP: " << bpp << std::endl;
+	unsigned gl_texID;
+	glGenTextures(1, &gl_texID);
+	glBindTexture(GL_TEXTURE_2D, gl_texID);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT32, imageWidth, imageHeight, 0, GL_DEPTH_COMPONENT, GL_FLOAT, bits);
+	FreeImage_Unload(image);
 	
 	// std::cout << read("./todo.txt") << std::endl;
 	
