@@ -1,8 +1,23 @@
 [
 {
   "directory": "C:/David/Programming/Github/MazeEngine/build",
-  "command": "C:/dev/msys64/mingw64/bin/g++.exe    -g   -o CMakeFiles/MazeEngine.dir/src/main.cpp.obj -c C:/David/Programming/Github/MazeEngine/src/main.cpp",
+  "command": "C:/dev/msys64/mingw64/bin/g++.exe   @CMakeFiles/MazeEngine.dir/includes_CXX.rsp -g   -o CMakeFiles/MazeEngine.dir/src/main.cpp.obj -c C:/David/Programming/Github/MazeEngine/src/main.cpp",
   "file": "C:/David/Programming/Github/MazeEngine/src/main.cpp"
+},
+{
+  "directory": "C:/David/Programming/Github/MazeEngine/build",
+  "command": "C:/dev/msys64/mingw64/bin/g++.exe   @CMakeFiles/MazeEngine.dir/includes_CXX.rsp -g   -o CMakeFiles/MazeEngine.dir/src/shaders.cpp.obj -c C:/David/Programming/Github/MazeEngine/src/shaders.cpp",
+  "file": "C:/David/Programming/Github/MazeEngine/src/shaders.cpp"
+},
+{
+  "directory": "C:/David/Programming/Github/MazeEngine/build",
+  "command": "C:/dev/msys64/mingw64/bin/g++.exe   @CMakeFiles/MazeEngine.dir/includes_CXX.rsp -g   -o CMakeFiles/MazeEngine.dir/src/read.cpp.obj -c C:/David/Programming/Github/MazeEngine/src/read.cpp",
+  "file": "C:/David/Programming/Github/MazeEngine/src/read.cpp"
+},
+{
+  "directory": "C:/David/Programming/Github/MazeEngine/build/lib/glad",
+  "command": "C:/dev/msys64/mingw64/bin/gcc.exe  @CMakeFiles/glad.dir/includes_C.rsp -g   -o CMakeFiles/glad.dir/src/glad.c.obj   -c C:/David/Programming/Github/MazeEngine/build/lib/glad/src/glad.c",
+  "file": "C:/David/Programming/Github/MazeEngine/build/lib/glad/src/glad.c"
 },
 {
   "directory": "C:/David/Programming/Github/MazeEngine/build/lib/glfw/src",

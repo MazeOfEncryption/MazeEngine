@@ -567,6 +567,32 @@ NightlyTest/fast:
 .PHONY : NightlyTest/fast
 
 #=============================================================================
+# Target rules for targets named glad-generate-files
+
+# Build rule for target.
+glad-generate-files: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 glad-generate-files
+.PHONY : glad-generate-files
+
+# fast build rule for target.
+glad-generate-files/fast:
+	$(MAKE) -f lib/glad/CMakeFiles/glad-generate-files.dir/build.make lib/glad/CMakeFiles/glad-generate-files.dir/build
+.PHONY : glad-generate-files/fast
+
+#=============================================================================
+# Target rules for targets named glad
+
+# Build rule for target.
+glad: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 glad
+.PHONY : glad
+
+# fast build rule for target.
+glad/fast:
+	$(MAKE) -f lib/glad/CMakeFiles/glad.dir/build.make lib/glad/CMakeFiles/glad.dir/build
+.PHONY : glad/fast
+
+#=============================================================================
 # Target rules for targets named uninstall
 
 # Build rule for target.
@@ -619,6 +645,60 @@ src/main.cpp.s:
 	cd c:/David/Programming/Github/MazeEngine/build && $(MAKE) -f CMakeFiles/MazeEngine.dir/build.make CMakeFiles/MazeEngine.dir/src/main.cpp.s
 .PHONY : src/main.cpp.s
 
+src/read.obj: src/read.cpp.obj
+
+.PHONY : src/read.obj
+
+# target to build an object file
+src/read.cpp.obj:
+	cd c:/David/Programming/Github/MazeEngine/build && $(MAKE) -f CMakeFiles/MazeEngine.dir/build.make CMakeFiles/MazeEngine.dir/src/read.cpp.obj
+.PHONY : src/read.cpp.obj
+
+src/read.i: src/read.cpp.i
+
+.PHONY : src/read.i
+
+# target to preprocess a source file
+src/read.cpp.i:
+	cd c:/David/Programming/Github/MazeEngine/build && $(MAKE) -f CMakeFiles/MazeEngine.dir/build.make CMakeFiles/MazeEngine.dir/src/read.cpp.i
+.PHONY : src/read.cpp.i
+
+src/read.s: src/read.cpp.s
+
+.PHONY : src/read.s
+
+# target to generate assembly for a file
+src/read.cpp.s:
+	cd c:/David/Programming/Github/MazeEngine/build && $(MAKE) -f CMakeFiles/MazeEngine.dir/build.make CMakeFiles/MazeEngine.dir/src/read.cpp.s
+.PHONY : src/read.cpp.s
+
+src/shaders.obj: src/shaders.cpp.obj
+
+.PHONY : src/shaders.obj
+
+# target to build an object file
+src/shaders.cpp.obj:
+	cd c:/David/Programming/Github/MazeEngine/build && $(MAKE) -f CMakeFiles/MazeEngine.dir/build.make CMakeFiles/MazeEngine.dir/src/shaders.cpp.obj
+.PHONY : src/shaders.cpp.obj
+
+src/shaders.i: src/shaders.cpp.i
+
+.PHONY : src/shaders.i
+
+# target to preprocess a source file
+src/shaders.cpp.i:
+	cd c:/David/Programming/Github/MazeEngine/build && $(MAKE) -f CMakeFiles/MazeEngine.dir/build.make CMakeFiles/MazeEngine.dir/src/shaders.cpp.i
+.PHONY : src/shaders.cpp.i
+
+src/shaders.s: src/shaders.cpp.s
+
+.PHONY : src/shaders.s
+
+# target to generate assembly for a file
+src/shaders.cpp.s:
+	cd c:/David/Programming/Github/MazeEngine/build && $(MAKE) -f CMakeFiles/MazeEngine.dir/build.make CMakeFiles/MazeEngine.dir/src/shaders.cpp.s
+.PHONY : src/shaders.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -663,11 +743,19 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... package"
 	@echo "... test"
+	@echo "... glad-generate-files"
+	@echo "... glad"
 	@echo "... uninstall"
 	@echo "... glfw"
 	@echo "... src/main.obj"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
+	@echo "... src/read.obj"
+	@echo "... src/read.i"
+	@echo "... src/read.s"
+	@echo "... src/shaders.obj"
+	@echo "... src/shaders.i"
+	@echo "... src/shaders.s"
 .PHONY : help
 
 

@@ -58,6 +58,7 @@ include CMakeFiles/MazeEngine.dir/progress.make
 include CMakeFiles/MazeEngine.dir/flags.make
 
 CMakeFiles/MazeEngine.dir/src/main.cpp.obj: CMakeFiles/MazeEngine.dir/flags.make
+CMakeFiles/MazeEngine.dir/src/main.cpp.obj: CMakeFiles/MazeEngine.dir/includes_CXX.rsp
 CMakeFiles/MazeEngine.dir/src/main.cpp.obj: ../src/main.cpp
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:/David/Programming/Github/MazeEngine/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/MazeEngine.dir/src/main.cpp.obj"
 	cd C:/David/Programming/Github/MazeEngine/build && C:/dev/msys64/mingw64/bin/g++.exe  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/MazeEngine.dir/src/main.cpp.obj -c C:/David/Programming/Github/MazeEngine/src/main.cpp
@@ -70,18 +71,52 @@ CMakeFiles/MazeEngine.dir/src/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/MazeEngine.dir/src/main.cpp.s"
 	cd C:/David/Programming/Github/MazeEngine/build && C:/dev/msys64/mingw64/bin/g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:/David/Programming/Github/MazeEngine/src/main.cpp -o CMakeFiles/MazeEngine.dir/src/main.cpp.s
 
+CMakeFiles/MazeEngine.dir/src/shaders.cpp.obj: CMakeFiles/MazeEngine.dir/flags.make
+CMakeFiles/MazeEngine.dir/src/shaders.cpp.obj: CMakeFiles/MazeEngine.dir/includes_CXX.rsp
+CMakeFiles/MazeEngine.dir/src/shaders.cpp.obj: ../src/shaders.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:/David/Programming/Github/MazeEngine/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/MazeEngine.dir/src/shaders.cpp.obj"
+	cd C:/David/Programming/Github/MazeEngine/build && C:/dev/msys64/mingw64/bin/g++.exe  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/MazeEngine.dir/src/shaders.cpp.obj -c C:/David/Programming/Github/MazeEngine/src/shaders.cpp
+
+CMakeFiles/MazeEngine.dir/src/shaders.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/MazeEngine.dir/src/shaders.cpp.i"
+	cd C:/David/Programming/Github/MazeEngine/build && C:/dev/msys64/mingw64/bin/g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:/David/Programming/Github/MazeEngine/src/shaders.cpp > CMakeFiles/MazeEngine.dir/src/shaders.cpp.i
+
+CMakeFiles/MazeEngine.dir/src/shaders.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/MazeEngine.dir/src/shaders.cpp.s"
+	cd C:/David/Programming/Github/MazeEngine/build && C:/dev/msys64/mingw64/bin/g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:/David/Programming/Github/MazeEngine/src/shaders.cpp -o CMakeFiles/MazeEngine.dir/src/shaders.cpp.s
+
+CMakeFiles/MazeEngine.dir/src/read.cpp.obj: CMakeFiles/MazeEngine.dir/flags.make
+CMakeFiles/MazeEngine.dir/src/read.cpp.obj: CMakeFiles/MazeEngine.dir/includes_CXX.rsp
+CMakeFiles/MazeEngine.dir/src/read.cpp.obj: ../src/read.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:/David/Programming/Github/MazeEngine/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/MazeEngine.dir/src/read.cpp.obj"
+	cd C:/David/Programming/Github/MazeEngine/build && C:/dev/msys64/mingw64/bin/g++.exe  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/MazeEngine.dir/src/read.cpp.obj -c C:/David/Programming/Github/MazeEngine/src/read.cpp
+
+CMakeFiles/MazeEngine.dir/src/read.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/MazeEngine.dir/src/read.cpp.i"
+	cd C:/David/Programming/Github/MazeEngine/build && C:/dev/msys64/mingw64/bin/g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:/David/Programming/Github/MazeEngine/src/read.cpp > CMakeFiles/MazeEngine.dir/src/read.cpp.i
+
+CMakeFiles/MazeEngine.dir/src/read.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/MazeEngine.dir/src/read.cpp.s"
+	cd C:/David/Programming/Github/MazeEngine/build && C:/dev/msys64/mingw64/bin/g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:/David/Programming/Github/MazeEngine/src/read.cpp -o CMakeFiles/MazeEngine.dir/src/read.cpp.s
+
 # Object files for target MazeEngine
 MazeEngine_OBJECTS = \
-"CMakeFiles/MazeEngine.dir/src/main.cpp.obj"
+"CMakeFiles/MazeEngine.dir/src/main.cpp.obj" \
+"CMakeFiles/MazeEngine.dir/src/shaders.cpp.obj" \
+"CMakeFiles/MazeEngine.dir/src/read.cpp.obj"
 
 # External object files for target MazeEngine
 MazeEngine_EXTERNAL_OBJECTS =
 
 MazeEngine.exe: CMakeFiles/MazeEngine.dir/src/main.cpp.obj
+MazeEngine.exe: CMakeFiles/MazeEngine.dir/src/shaders.cpp.obj
+MazeEngine.exe: CMakeFiles/MazeEngine.dir/src/read.cpp.obj
 MazeEngine.exe: CMakeFiles/MazeEngine.dir/build.make
+MazeEngine.exe: lib/glad/libglad.a
+MazeEngine.exe: lib/glfw/src/libglfw3.a
 MazeEngine.exe: CMakeFiles/MazeEngine.dir/linklibs.rsp
 MazeEngine.exe: CMakeFiles/MazeEngine.dir/objects1.rsp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=C:/David/Programming/Github/MazeEngine/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable MazeEngine.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=C:/David/Programming/Github/MazeEngine/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX executable MazeEngine.exe"
 	cd C:/David/Programming/Github/MazeEngine/build && C:/dev/msys64/mingw64/bin/cmake.exe -E remove -f CMakeFiles/MazeEngine.dir/objects.a
 	cd C:/David/Programming/Github/MazeEngine/build && C:/dev/msys64/mingw64/bin/ar.exe cr CMakeFiles/MazeEngine.dir/objects.a @CMakeFiles/MazeEngine.dir/objects1.rsp
 	cd C:/David/Programming/Github/MazeEngine/build && C:/dev/msys64/mingw64/bin/g++.exe -g   -Wl,--whole-archive CMakeFiles/MazeEngine.dir/objects.a -Wl,--no-whole-archive  -o MazeEngine.exe -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles/MazeEngine.dir/linklibs.rsp

@@ -1,0 +1,2 @@
+C:/dev/msys64/mingw64/bin/ar.exe qc libglm_static.a  CMakeFiles/glm_static.dir/detail/glm.cpp.obj
+C:/dev/msys64/mingw64/bin/ranlib.exe libglm_static.a

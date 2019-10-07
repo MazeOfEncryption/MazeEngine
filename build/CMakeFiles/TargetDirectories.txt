@@ -36,6 +36,17 @@ C:/David/Programming/Github/MazeEngine/build/CMakeFiles/NightlyTest.dir
 C:/David/Programming/Github/MazeEngine/build/CMakeFiles/rebuild_cache.dir
 C:/David/Programming/Github/MazeEngine/build/CMakeFiles/package.dir
 C:/David/Programming/Github/MazeEngine/build/CMakeFiles/test.dir
+C:/David/Programming/Github/MazeEngine/build/lib/glad/CMakeFiles/install/strip.dir
+C:/David/Programming/Github/MazeEngine/build/lib/glad/CMakeFiles/install.dir
+C:/David/Programming/Github/MazeEngine/build/lib/glad/CMakeFiles/list_install_components.dir
+C:/David/Programming/Github/MazeEngine/build/lib/glad/CMakeFiles/rebuild_cache.dir
+C:/David/Programming/Github/MazeEngine/build/lib/glad/CMakeFiles/glad-generate-files.dir
+C:/David/Programming/Github/MazeEngine/build/lib/glad/CMakeFiles/glad.dir
+C:/David/Programming/Github/MazeEngine/build/lib/glad/CMakeFiles/edit_cache.dir
+C:/David/Programming/Github/MazeEngine/build/lib/glad/CMakeFiles/package.dir
+C:/David/Programming/Github/MazeEngine/build/lib/glad/CMakeFiles/package_source.dir
+C:/David/Programming/Github/MazeEngine/build/lib/glad/CMakeFiles/install/local.dir
+C:/David/Programming/Github/MazeEngine/build/lib/glad/CMakeFiles/test.dir
 C:/David/Programming/Github/MazeEngine/build/lib/glfw/CMakeFiles/install/strip.dir
 C:/David/Programming/Github/MazeEngine/build/lib/glfw/CMakeFiles/install.dir
 C:/David/Programming/Github/MazeEngine/build/lib/glfw/CMakeFiles/list_install_components.dir

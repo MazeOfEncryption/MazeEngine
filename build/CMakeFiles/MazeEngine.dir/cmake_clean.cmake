@@ -1,5 +1,7 @@
 file(REMOVE_RECURSE
   "CMakeFiles/MazeEngine.dir/src/main.cpp.obj"
+  "CMakeFiles/MazeEngine.dir/src/shaders.cpp.obj"
+  "CMakeFiles/MazeEngine.dir/src/read.cpp.obj"
   "MazeEngine.pdb"
   "MazeEngine.exe"
   "MazeEngine.exe.manifest"

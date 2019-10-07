@@ -34,6 +34,7 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
+  include("C:/David/Programming/Github/MazeEngine/build/lib/glad/cmake_install.cmake")
   include("C:/David/Programming/Github/MazeEngine/build/lib/glfw/cmake_install.cmake")
 
 endif()
