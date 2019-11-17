@@ -59,6 +59,5 @@
         "xtree": "cpp",
         "xutility": "cpp"
     },
-    "cmake.configureOnOpen": true,
-    "C_Cpp.default.configurationProvider": "vector-of-bool.cmake-tools"
+    "cmake.configureOnOpen": true
 }

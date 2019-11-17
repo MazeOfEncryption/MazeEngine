@@ -10,7 +10,7 @@ std::string read(std::string file) {
 	stream << in.rdbuf();
 	return stream.str();
 }
-// Function for copying bytes from a string to some type t
+// Method which copies bytes from a string to type t
 template <typename type>
 type stringBytes (std::string input) {
 	type output;

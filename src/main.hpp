@@ -1,10 +1,10 @@
 #define _USE_MATH_DEFINES
+#include <cmath>
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <glm.hpp>
 #include <gtx/string_cast.hpp>
 #include <ext.hpp>
-#include <cmath>
 #include <vector>
 #include <string>
 #include <iostream>
