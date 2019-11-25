@@ -55,7 +55,7 @@ typedef struct plane {
 		return (-normal.x * x - normal.y * y - normal.w) / normal.z;
 	}
 } plane;
-int notmain() {
+int main() {
 	std::vector<float> vertices {
 		-1.0f, -1.0f,  0.0f,
 		-1.0f,  1.0f,  0.0f,
@@ -258,6 +258,3 @@ int notmain() {
 	}
 	return 0;
 }
-int *x = 1;
-int *y;
-memcpy();
