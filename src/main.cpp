@@ -20,12 +20,13 @@ void keyEvent(GLFWwindow* window, int key, int scancode, int action, int mods) {
 	if (key == GLFW_KEY_W && action == GLFW_PRESS && (mods >> 1) & 1) glfwSetWindowShouldClose(window, GLFW_TRUE);
 	if (key == GLFW_KEY_R && action == GLFW_PRESS) reloadShaders = true;
 }
-unsigned u_worldMatrix, u_rotation, u_camera, u_view;
+unsigned u_worldMatrix, u_rotation, u_camera, u_view, u_time;
 void getLocations(int *shaderProgram) {
 	u_worldMatrix = glGetUniformLocation(*shaderProgram, "u_worldMatrix");
 	u_rotation = glGetUniformLocation(*shaderProgram, "u_rotation");
 	u_camera = glGetUniformLocation(*shaderProgram, "u_camera");
 	u_view = glGetUniformLocation(*shaderProgram, "u_view");
+	u_time = glGetUniformLocation(*shaderProgram, "u_time");
 }
 unsigned vectorFloatBuffer (std::vector<float> *vector, int *shaderProgram, std::string location) {
 	unsigned buffer;
@@ -91,7 +92,7 @@ int main() {
 	glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GL_TRUE);
 	// glfwWindowHint(GLFW_DOUBLEBUFFER, GL_FALSE);
 	// glfwWindowHint(GLFW_MAXIMIZED, true);
-	GLFWwindow* window = glfwCreateWindow(800, 600, "MazeEngine", NULL, NULL);
+	GLFWwindow* window = glfwCreateWindow(960, 540, "MazeEngine", NULL, NULL);
 	glfwMakeContextCurrent(window);
 	glfwSetWindowFocusCallback(window, windowFocus);
 	glfwSetKeyCallback(window, keyEvent);
@@ -236,6 +237,8 @@ int main() {
 		glUniformMatrix4fv(u_rotation, 1, GL_FALSE, glm::value_ptr(rotation));
 		glUniformMatrix4fv(u_view, 1, GL_FALSE, glm::value_ptr(view));
 		glUniform3fv(u_camera, 1, glm::value_ptr(camera));
+		glUniform3fv(u_camera, 1, glm::value_ptr(camera));
+		glUniform1f(u_time, glfwGetTime());
 		
 		glBindVertexArray(vao);
 		glDrawArrays(GL_TRIANGLES, 0, vertices.size() / 3);
