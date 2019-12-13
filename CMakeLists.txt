@@ -34,3 +34,8 @@ add_custom_command(TARGET MazeEngine POST_BUILD
         "${PROJECT_SOURCE_DIR}/lib/FreeImage/Dist/x64/FreeImage.dll"
 		"$<TARGET_FILE_DIR:MazeEngine>"
 )
+add_custom_command(TARGET MazeEngine POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_directory
+        "${PROJECT_SOURCE_DIR}/shaders/"
+		"$<TARGET_FILE_DIR:MazeEngine>"
+)
