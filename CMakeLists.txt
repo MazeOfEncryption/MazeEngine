@@ -22,7 +22,7 @@ add_executable(MazeEngine src/main.cpp src/Read.cpp src/Read.hpp src/Window.cpp 
 target_link_libraries(MazeEngine glad)
 target_link_libraries(MazeEngine glfw)
 target_link_libraries(MazeEngine freeimage.lib)
-target_link_libraries(MazeEngine -mwindows)
+# target_link_libraries(MazeEngine -mwindows)
 
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
 set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})

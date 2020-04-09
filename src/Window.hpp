@@ -9,17 +9,17 @@ namespace MazeEngine {
 	class Window {
 		public:
 			std::string read(std::string file);
-		void compileShaders();
+			void compileShaders();
 			void init();
 			bool shouldClose();
 			void clear();
 			void draw();
 			Window(std::string vert, std::string frag);
+			int shaderProgram;
 		private:
 			void glfwWindowHints();
 			GLFWwindow* window;
 			std::string vert, frag;
-			int shaderProgram;
 	};
 }
 #endif
