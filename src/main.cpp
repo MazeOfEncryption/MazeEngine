@@ -1,6 +1,16 @@
 #include "MazeEngine.hpp"
 #include "Window.hpp"
 #include "Read.hpp"
+/*
+* TODO:
+* Create Shader Class
+* Multi Shader Support
+* Some sort of 3d Object Class
+* Multi Object Support
+* Keyboard handling
+* Standard Uniforms for shaders
+* Easy way to add custom uniforms
+*/
 int main() {
 	std::vector<float> vertices, normals;
 
