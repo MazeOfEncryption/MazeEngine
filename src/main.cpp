@@ -10,7 +10,6 @@
 * Keyboard handling
 * Standard Uniforms for shaders
 * Easy way to add custom uniforms
-* 
 */
 int main() {
 	std::vector<float> vertices, normals;
