@@ -1,17 +1,8 @@
 #include "Window.hpp"
-std::string Window::read(std::string file) {
-	std::ifstream in (file);
-	if (in.fail()) {
-		std::cout << "ERROR::IFSTREAM::FAIL" << std::endl;
-		return "";
-	}
-	std::stringstream stream;
-	stream << in.rdbuf();
-	return stream.str();
-}
-void Window::compileShaders() {
-	std::string vertexShaderCode = read(this->vert);
-	std::string fragmentShaderCode = read(this->frag);
+#include "Read.hpp"
+void MazeEngine::Window::compileShaders() {
+	std::string vertexShaderCode = MazeEngine::readTxt(this->vert);
+	std::string fragmentShaderCode = MazeEngine::readTxt(this->frag);
 	
 	const char * vertexShaderSource = vertexShaderCode.c_str();
 	const char * fragmentShaderSource = fragmentShaderCode.c_str();
@@ -58,14 +49,14 @@ void Window::compileShaders() {
 	this->shaderProgram = shaderProgram;
 	std::cout << "Shaders loaded." << std::endl;
 }
-void Window::glfwWindowHints() {
+void MazeEngine::Window::glfwWindowHints() {
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 	glfwWindowHint(GLFW_SAMPLES, 8);
 	glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GL_TRUE);
 }
-void Window::init() {
+void MazeEngine::Window::init() {
     glfwInit();
 	Window::glfwWindowHints();
 	this->window = glfwCreateWindow(960, 540, "MazeCV", NULL, NULL);
@@ -73,18 +64,18 @@ void Window::init() {
 	gladLoadGL();
 	glEnable(GL_DEBUG_OUTPUT);
 } 
-bool Window::shouldClose() {
+bool MazeEngine::Window::shouldClose() {
 	return glfwWindowShouldClose(this->window);
 }
-void Window::clear() {
+void MazeEngine::Window::clear() {
 	glClearColor(0.2f, 0.3f, 0.4f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
-void Window::draw() {
+void MazeEngine::Window::draw() {
 	glfwSwapBuffers(this->window);
 	glfwPollEvents();
 }
-Window::Window(std::string vert, std::string frag) {
+MazeEngine::Window::Window(std::string vert, std::string frag) {
 	std::cout << "Constructor Called" << std::endl;
 	this->vert = vert;
 	this->frag = frag;

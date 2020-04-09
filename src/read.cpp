@@ -1,6 +1,6 @@
-#include "main.hpp"
+#include "Read.hpp"
 // Function to read a file into a string
-std::string read(std::string file) {
+std::string MazeEngine::readTxt(std::string file) {
 	std::ifstream in (file);
 	if (in.fail()) {
 		std::cout << "ERROR::IFSTREAM::FAIL" << std::endl;
@@ -18,8 +18,8 @@ type stringBytes (std::string input) {
 	memcpy(&output, bytes, sizeof(type));
 	return output;
 }
-void readStl (std::string file, std::vector<float> *vertices, std::vector<float> *normals) {
-	std::string object = read(file);
+void MazeEngine::readStl (std::string file, std::vector<float> *vertices, std::vector<float> *normals) {
+	std::string object = MazeEngine::readTxt(file);
 	std::string header = object.substr(0, 80);
 	std::cout << "Header: " << header << std::endl;
 	std::string lengthString = object.substr(80, 4);
@@ -51,7 +51,7 @@ typedef struct {
 typedef struct {
 	tuple vertex, normal;
 } point;
-void readPly (std::string file, std::vector<float> *vertices, std::vector<float> *normals) {
+void MazeEngine::readPly (std::string file, std::vector<float> *vertices, std::vector<float> *normals) {
 	std::ifstream in(file);
 	std::string block;
 	int pointCount;
