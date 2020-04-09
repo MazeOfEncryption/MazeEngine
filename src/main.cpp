@@ -15,9 +15,9 @@
 int main() {
 	std::vector<float> vertices, normals;
 
-	MazeEngine::readPly("object.ply", &vertices, &normals);
+	MazeEngine::readPly("meshes/object.ply", &vertices, &normals);
 	
-	MazeEngine::Window win = MazeEngine::Window("vert.glsl", "static.glsl");
+	MazeEngine::Window win = MazeEngine::Window("shaders/vert.glsl", "shaders/static.glsl");
 	std::cout << "Test." << std::endl;
 	win.init();
 	win.compileShaders();

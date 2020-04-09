@@ -70,7 +70,8 @@
 		"optional": "cpp",
 		"random": "cpp",
 		"string_view": "cpp",
-		"cinttypes": "cpp"
+		"cinttypes": "cpp",
+		"bit": "cpp"
 	},
     "cmake.configureOnOpen": true,
     "C_Cpp.default.configurationProvider": "vector-of-bool.cmake-tools"

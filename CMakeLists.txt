@@ -37,5 +37,10 @@ add_custom_command(TARGET MazeEngine POST_BUILD
 add_custom_command(TARGET MazeEngine POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E copy_directory
         "${PROJECT_SOURCE_DIR}/shaders/"
-		"$<TARGET_FILE_DIR:MazeEngine>"
+		"$<TARGET_FILE_DIR:MazeEngine>/shaders/"
+)
+add_custom_command(TARGET MazeEngine POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_directory
+        "${PROJECT_SOURCE_DIR}/meshes/"
+		"$<TARGET_FILE_DIR:MazeEngine>/meshes/"
 )
