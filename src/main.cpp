@@ -3,9 +3,15 @@
 * TODO:
 * Some sort of 3d Object Class
 * Multi Object Support
-* Keyboard handling
 * Standard Uniforms for shaders
 * Easy way to add custom uniforms
+* Move main.cpp to seperate test folder
+* Rename lib to dep
+* Seperate all header files and implimentation files
+* Build library instead of exe(?)
+* Common shaders as enums
+* Better way of packaging shaders, resources, etc. (Most likely move shaders into string literals in header files)
+* Keyboard handling
 */
 int main() {
 	std::vector<float> vertices, normals;
