@@ -12,7 +12,7 @@ jobs:
       with:
         submodules: 'recursive'
     - name: install-packages
-      run: sudo apt-get install libgl1-mesa-dev
+      run: sudo apt-get install xorg-dev libgl1-mesa-dev
     - name: configure
       run: mkdir build && cd build && cmake -DCMAKE_CXX_FLAGS="-Werror" ..
     - name: build
