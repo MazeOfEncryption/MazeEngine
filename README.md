@@ -1,4 +1,4 @@
 # MazeEngine
-Simple OpenGL Game Engine
+Simple OpenGL Graphics Engine
 ## Note
-This repo is now in a transition-phase. I'm switching from just using makefiles and copies of libaries this repo is using to using cmake and git submodules. I think in the future I'd like to make MazeEngine a standalone library, and have other repos to demonstrate how it might be used. At the time being, don't expect this repo to do anything, as the code isn't functional and probably won't be for a while.
+This is a very WIP project. Anyone wanting to contribute is welcome, but don't expect much from this project in its current form.
