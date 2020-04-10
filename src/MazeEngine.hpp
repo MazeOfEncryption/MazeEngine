@@ -1,6 +1,7 @@
 #ifndef MAZEENGINE
 #define MAZEENGINE
-#include <glad/glad.h>
-#include <GLFW/glfw3.h>
-#include <glm.hpp>
+#include "Dep.hpp"
+#include "Read.hpp"
+#include "Window.hpp"
+#include "Shader.hpp"
 #endif

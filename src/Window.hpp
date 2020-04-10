@@ -1,6 +1,7 @@
 #ifndef MAZEENGINE_WINDOW
 #define MAZEENGINE_WINDOW
-#include "MazeEngine.hpp"
+#include "Dep.hpp"
+#include "Read.hpp"
 #include <string>
 #include <iostream>
 #include <fstream>
@@ -8,18 +9,16 @@
 namespace MazeEngine {
 	class Window {
 		public:
-			std::string read(std::string file);
-			void compileShaders();
-			void init();
 			bool shouldClose();
 			void clear();
 			void draw();
-			Window(std::string vert, std::string frag);
-			int shaderProgram;
+			Window(std::string title, int width, int height);
 		private:
+			void init();
+			std::string title;
+			int width, height;
 			void glfwWindowHints();
 			GLFWwindow* window;
-			std::string vert, frag;
 	};
 }
 #endif

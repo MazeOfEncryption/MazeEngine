@@ -1,7 +1,7 @@
 #ifndef MAZEENGINE_READ
 #define MAZEENGINE_READ
 #define _USE_MATH_DEFINES
-#include "MazeEngine.hpp"
+#include "Dep.hpp"
 #include <gtx/string_cast.hpp>
 #include <ext.hpp>
 #include <cmath>

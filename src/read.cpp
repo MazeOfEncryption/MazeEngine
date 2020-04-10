@@ -21,10 +21,8 @@ type stringBytes (std::string input) {
 void MazeEngine::readStl (std::string file, std::vector<float> *vertices, std::vector<float> *normals) {
 	std::string object = MazeEngine::readTxt(file);
 	std::string header = object.substr(0, 80);
-	std::cout << "Header: " << header << std::endl;
 	std::string lengthString = object.substr(80, 4);
 	unsigned length = stringBytes<unsigned>(lengthString);
-	std::cout << "Length: " << length << std::endl;
 	int position = 84;
 	float newNormals[3];
 	for (unsigned x = 0; x < length; x++) {
@@ -93,7 +91,4 @@ void MazeEngine::readPly (std::string file, std::vector<float> *vertices, std::v
 			normals->push_back(point.normal.z);
 		}
 	}
-	std::cout << points.size() << std::endl;
-	std::cout << "Points: " << pointCount << std::endl;
-	std::cout << "Faces: " << faceCount << std::endl;
 }
