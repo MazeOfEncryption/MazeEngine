@@ -17,7 +17,7 @@ include_directories(lib/FreeImage/Dist/x64)
 
 link_directories(lib/FreeImage/Dist/x64/)
 
-add_executable(MazeEngine ./src/main.cpp ./src/Read.cpp ./src/Read.hpp ./src/Window.cpp ./src/Window.hpp ./src/MazeEngine.hpp ./src/Shader.cpp ./src/Shader.hpp)
+add_executable(MazeEngine $(CMAKE_CURRENT_SOURCE_DIR)/src/main.cpp $(CMAKE_CURRENT_SOURCE_DIR)/src/Read.cpp $(CMAKE_CURRENT_SOURCE_DIR)/src/Read.hpp $(CMAKE_CURRENT_SOURCE_DIR)/src/Window.cpp $(CMAKE_CURRENT_SOURCE_DIR)/src/Window.hpp $(CMAKE_CURRENT_SOURCE_DIR)/src/MazeEngine.hpp $(CMAKE_CURRENT_SOURCE_DIR)/src/Shader.cpp $(CMAKE_CURRENT_SOURCE_DIR)/src/Shader.hpp)
 
 target_link_libraries(MazeEngine glad)
 target_link_libraries(MazeEngine glfw)
