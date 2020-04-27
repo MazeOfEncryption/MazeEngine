@@ -7,6 +7,8 @@ namespace MazeEngine {
     class Shader {
         public:
             Shader (std::string vert, std::string frag);
+            Shader ();
+			void setSource(std::string vert, std::string frag);
             void compile();
             unsigned getId();
         private:

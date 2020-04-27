@@ -4,7 +4,11 @@ MazeEngine::Shader::Shader (std::string vert, std::string frag) {
     this->frag = frag;
     this->compile();
 };
-
+MazeEngine::Shader::Shader () {}
+void MazeEngine::Shader::setSource(std::string vert, std::string frag) {
+	this->vert = vert;
+    this->frag = frag;
+}
 void MazeEngine::Shader::compile () {
 	std::string vertexShaderCode = MazeEngine::readTxt(this->vert);
 	std::string fragmentShaderCode = MazeEngine::readTxt(this->frag);

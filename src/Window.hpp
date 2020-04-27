@@ -9,7 +9,7 @@
 namespace MazeEngine {
 	class Window {
 		public:
-			bool shouldClose();
+			bool active();
 			void clear();
 			void draw();
 			Window(std::string title, int width, int height);

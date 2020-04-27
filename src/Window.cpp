@@ -15,8 +15,8 @@ void MazeEngine::Window::init() {
 	gladLoadGL();
 	glEnable(GL_DEBUG_OUTPUT);
 } 
-bool MazeEngine::Window::shouldClose() {
-	return glfwWindowShouldClose(this->window);
+bool MazeEngine::Window::active() {
+	return !glfwWindowShouldClose(this->window);
 }
 void MazeEngine::Window::clear() {
 	glClearColor(0.2f, 0.3f, 0.4f, 1.0f);
