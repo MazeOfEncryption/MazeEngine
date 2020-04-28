@@ -45,11 +45,15 @@ void MazeEngine::readStl (std::string file, std::vector<float> *vertices, std::v
 }
 typedef struct {
 	float x, y, z;
-} tuple;
+} vec3;
 typedef struct {
-	tuple vertex, normal;
+	float u, v;
+} vec2;
+typedef struct {
+	vec3 vertex, normal;
+	vec2 uv;
 } point;
-void MazeEngine::readPly (std::string file, std::vector<float> *vertices, std::vector<float> *normals) {
+void MazeEngine::readPly (std::string file, std::vector<float> *vertices, std::vector<float> *normals, std::vector<float> *UVs) {
 	std::ifstream in(file);
 	std::string block;
 	int pointCount;
@@ -71,7 +75,7 @@ void MazeEngine::readPly (std::string file, std::vector<float> *vertices, std::v
 	}
 	for (int i = 0; i < pointCount; i++) {
 		point point;
-		in >> point.vertex.x >> point.vertex.y >> point.vertex.z >> point.normal.x >> point.normal.y >> point.normal.z;
+		in >> point.vertex.x >> point.vertex.y >> point.vertex.z >> point.normal.x >> point.normal.y >> point.normal.z >> point.uv.u >> point.uv.v;
 		points.push_back(point);
 	}
 	for (int i = 0; i < faceCount * 4; i++) {
@@ -89,6 +93,8 @@ void MazeEngine::readPly (std::string file, std::vector<float> *vertices, std::v
 			normals->push_back(point.normal.x);
 			normals->push_back(point.normal.y);
 			normals->push_back(point.normal.z);
+			UVs->push_back(point.uv.u);
+			UVs->push_back(point.uv.v);
 		}
 	}
 }

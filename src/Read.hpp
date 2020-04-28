@@ -15,6 +15,6 @@
 namespace MazeEngine {
 	std::string readTxt (std::string file);
 	void readStl (std::string file, std::vector<float> *vertices, std::vector<float> *normals);
-	void readPly (std::string file, std::vector<float> *vertices, std::vector<float> *normals);
+	void readPly (std::string file, std::vector<float> *vertices, std::vector<float> *normals, std::vector<float> *UVs);
 }
 #endif
