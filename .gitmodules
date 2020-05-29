@@ -7,6 +7,3 @@
 [submodule "lib/glad"]
 	path = lib/glad
 	url = https://github.com/Dav1dde/glad.git
-[submodule "lib/freetype-gl"]
-	path = lib/freetype-gl
-	url = https://github.com/rougier/freetype-gl
