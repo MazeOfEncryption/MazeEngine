@@ -1,3 +1,4 @@
+#define _USE_MATH_DEFINES
 #include "MazeEngine.hpp"
 /*
 * TODO:
@@ -17,6 +18,20 @@ bool mouseInput = false;
 void windowFocus (GLFWwindow* window, int focused) {
 	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
 	mouseInput = false;
+}
+// Function for finding the index of an element in a vector
+template <typename type>
+int indexOf (type element, std::vector<type> array) {
+	return std::distance(std::begin(array), std::find(std::begin(array), std::end(array), element));
+}
+// GLFW callback to get key presses
+std::vector<bool> keys {false, false, false, false};
+bool reloadShaders = false;
+void keyEvent(GLFWwindow* window, int key, int scancode, int action, int mods) {
+	std::vector<int> keyList {GLFW_KEY_W, GLFW_KEY_A, GLFW_KEY_S, GLFW_KEY_D};
+	int index = indexOf<int>(key, keyList);
+	if (index < 4 && action != GLFW_REPEAT) keys[index] = action;
+	if (key == GLFW_KEY_R && action == GLFW_PRESS) reloadShaders = true;
 }
 
 /* end copy-paste old code */
@@ -42,11 +57,13 @@ int main() {
 	glm::mat4 rotationX, rotationY, rotation, worldMatrix;
 	
 	double lastX, lastY, posX, posY, deltaX, deltaY;
-	float angleX = 0.0f, angleY = 220.0f, locX = 0.0f, locY = 0.0f, max = 3.0f, acc = 0.5f, dec = 0.5f;
-	float fps = 0.0f, fpsSmoothing = 0.99f, dt = 0.0f, radiansX, radiansY;
-	std::vector<float> speed {0.0f, 0.0f, 0.0f, 0.0f};
+	float angleX = 0.0f, angleY = 220.0f, locX = 0.0f, locY = 0.0f, max = 3.0f, acc = 0.5f, dec = 0.25f;
+	float fps = 0.0f, fpsSmoothing = 0.99f, dt = 0.025f, radiansX, radiansY;
+	std::vector<float> speed {1.0f, 1.0f, 1.0f, 1.0f};
 	int width, height;
 
+	glfwSetWindowFocusCallback(win.window, windowFocus);
+	glfwSetKeyCallback(win.window, keyEvent);
 	glfwGetCursorPos(win.window, &lastX, &lastY);
 
 	/* end copy-paste old code */
@@ -90,15 +107,27 @@ int main() {
 		
 		radiansX = glm::radians(angleX);
 		radiansY = glm::radians(angleY);
+
+		for (int x = 0; x < 4; x++) {
+			// If keys true add acc, else sub dec, coerce between zero and max
+			speed[x] = keys[x] ? (speed[x] + acc > max ? max : speed[x] + acc) : (speed[x] - dec < 0 ? 0 : speed[x] - dec);
+			// Compute angle, subtract 90 deg if sideways 
+			float angle = angleX * M_PI / 180 - (x % 2 ? M_PI / 2 : 0);
+			// Compute direction
+			float dir = x < 2 ? -1 : 1;
+			// Add speed in direction in dt
+			camera.x -= speed[x] * sin(angle) * dir * dt;
+			camera.z += speed[x] * cos(angle) * dir * dt;
+		}
 		
-		projection = glm::perspective(90.0f, (float) width / (float) height, 0.1f, 20.0f);
+		projection = glm::perspective(glm::radians(90.0f), (float) width / (float) height, 0.1f, 20.0f);
 		rotationX = glm::rotate(glm::mat4(1.0f), radiansX, glm::vec3( 0.0f, -1.0f, 0.0f));
 		rotationY = glm::rotate(glm::mat4(1.0f), radiansY, glm::vec3(-1.0f,  0.0f, 0.0f));
-		glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(2.0f));
+		glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(100.0f));
 		rotation = rotationX * rotationY;
-		// target = glm::vec3(rotation * glm::vec4(0.0f, 0.0f, 1.0f, 1.0f));
-		// view = glm::lookAt(camera, camera + target, up);
-		worldMatrix = projection * rotation * scale;
+		target = glm::vec3(rotation * glm::vec4(0.0f, 0.0f, 1.0f, 1.0f));
+		view = glm::lookAt(camera, camera + target, up);
+		worldMatrix = projection * view;
 		
 		glUniformMatrix4fv(u_worldMatrix, 1, GL_FALSE, glm::value_ptr(worldMatrix));
 		glUniformMatrix4fv(u_rotation, 1, GL_FALSE, glm::value_ptr(rotation));
