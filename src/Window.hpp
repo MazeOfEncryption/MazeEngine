@@ -14,6 +14,7 @@ namespace MazeEngine {
 			void draw();
 			Window(std::string title, int width, int height);
 			GLFWwindow* window;
+			double startTime, time, dt;
 		private:
 			void init();
 			std::string title;

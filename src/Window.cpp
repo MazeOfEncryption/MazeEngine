@@ -23,6 +23,9 @@ void MazeEngine::Window::clear() {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 void MazeEngine::Window::draw() {
+	this->time = glfwGetTime();
+	this->dt = this->time - this->startTime;
+	this->startTime = this->time;
 	glfwSwapBuffers(this->window);
 	glfwPollEvents();
 }
@@ -31,5 +34,8 @@ MazeEngine::Window::Window(std::string title, int width, int height) {
 	this->title = title;
 	this->width = width;
 	this->height = height;
+	this->startTime = 0.0;
+	this->dt = 0.0;
+	this->time = 0.0;
 	this->init();
 }
