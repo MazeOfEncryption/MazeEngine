@@ -13,12 +13,12 @@ namespace MazeEngine {
 			void clear();
 			void draw();
 			Window(std::string title, int width, int height);
+			GLFWwindow* window;
 		private:
 			void init();
 			std::string title;
 			int width, height;
 			void glfwWindowHints();
-			GLFWwindow* window;
 	};
 }
 #endif
