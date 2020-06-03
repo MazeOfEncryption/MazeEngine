@@ -5,12 +5,27 @@ void MazeEngine::Object::setMesh(MazeEngine::Mesh mesh) {
 void MazeEngine::Object::setShader(MazeEngine::Shader shader) {
 	this->shader = shader;
 }
-MazeEngine::Object::Object(){}
+MazeEngine::Object::Object(){
+	this->mass = 0.0f;
+	this->drag = 0.0f;
+	this->force = glm::vec3(0);
+	this->acceleration = glm::vec3(0);
+	this->velocity = glm::vec3(0);
+	this->position = glm::vec3(0);
+	this->rotation = glm::vec3(0);
+}
 MazeEngine::Object::Object(MazeEngine::Mesh mesh, MazeEngine::Shader shader) {
 	this->mesh = mesh;
 	this->shader = shader;
 	this->loadMesh();
 	this->loadShader();
+	this->mass = 0.0f;
+	this->drag = 0.0f;
+	this->force = glm::vec3(0);
+	this->acceleration = glm::vec3(0);
+	this->velocity = glm::vec3(0);
+	this->position = glm::vec3(0);
+	this->rotation = glm::vec3(0);
 }
 void MazeEngine::Object::loadMesh() {
 	this->mesh.loadMesh();
@@ -51,4 +66,9 @@ void MazeEngine::Object::draw () {
 	MazeEngine::useShader(this->shader);
 	glBindVertexArray(this->vao);
 	glDrawArrays(GL_TRIANGLES, 0, this->mesh.vertices.size() / 3);
+}
+void MazeEngine::Object::tick (float dt) {
+	this->acceleration = this->force / this->mass;
+	this->velocity += this->acceleration - this->velocity * this->drag;
+	this->position += this->velocity;
 }

@@ -16,7 +16,9 @@ namespace MazeEngine {
 			void loadMesh();
 			void loadShader();
 			void draw();
-			glm::vec3 position, rotation;
+			void tick(float dt);
+			float mass, drag;
+			glm::vec3 force, acceleration, velocity, position, rotation;
 		private:
 			MazeEngine::Mesh mesh;
 			MazeEngine::Shader shader;
