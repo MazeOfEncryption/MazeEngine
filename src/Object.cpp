@@ -69,6 +69,6 @@ void MazeEngine::Object::draw () {
 }
 void MazeEngine::Object::tick (float dt) {
 	this->acceleration = this->force / this->mass;
-	this->velocity += this->acceleration - this->velocity * this->drag;
-	this->position += this->velocity;
+	this->velocity += this->acceleration * dt - this->velocity * this->drag;
+	this->position += this->velocity * dt;
 }

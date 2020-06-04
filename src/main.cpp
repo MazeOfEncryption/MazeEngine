@@ -43,9 +43,9 @@ int main() {
 	// Mesh mesh = Mesh("meshes/object.ply");
 	Object object = Object(mesh, shader);
 	Object player = Object();
-	player.position = glm::vec3(0.0f, 1.0f, 1.0f);
-	player.mass = 30.0f;
-	player.drag = 0.2f;
+	player.position = glm::vec3(0.0f, 0.0f, 1.0f);
+	player.mass = 0.0125f;
+	player.drag = 0.15f;
 	// Object object2 = Object(mesh2, shader);
 	/* begin copy-paste old code */
 	unsigned u_worldMatrix = glGetUniformLocation(shader.getId(), "u_worldMatrix");
@@ -124,15 +124,6 @@ int main() {
 		// 	camera.z += speed[x] * cos(angle) * dir * win.dt;
 		// }
 		
-		player.tick(0.0f);
-		projection = glm::perspective(glm::radians(90.0f), (float) width / (float) height, 0.1f, 20.0f);
-		rotationX = glm::rotate(glm::mat4(1.0f), glm::radians(angleX), glm::vec3( 0.0f, -1.0f, 0.0f));
-		rotationY = glm::rotate(glm::mat4(1.0f), glm::radians(angleY), glm::vec3(-1.0f,  0.0f, 0.0f));
-		glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(100.0f));
-		rotation = rotationX * rotationY;
-		target = glm::vec3(rotation * glm::vec4(0.0f, 0.0f, 1.0f, 1.0f));
-		view = glm::lookAt(player.position, player.position + target, up);
-		worldMatrix = projection * view;
 		glm::vec3 direction = glm::vec3(0.0f);
 		if(glfwGetKey(win.window, GLFW_KEY_W)) {
 			direction += glm::vec3( 0.0f,  0.0f, -1.0f);
@@ -151,6 +142,21 @@ int main() {
 		} else {
 			player.force = glm::vec3(0.0f);
 		}
+		if (glfwGetKey(win.window, GLFW_KEY_SPACE) && player.position.y == 0.0f) {
+			player.force.y += 15.0f;
+		}
+		player.force.y -= 0.75f;
+		player.tick(win.dt);
+		if (player.position.y < 0.0f) player.position.y = 0.0f;
+		projection = glm::perspective(glm::radians(90.0f), (float) width / (float) height, 0.1f, 20.0f);
+		rotationX = glm::rotate(glm::mat4(1.0f), glm::radians(angleX), glm::vec3( 0.0f, -1.0f, 0.0f));
+		rotationY = glm::rotate(glm::mat4(1.0f), glm::radians(angleY), glm::vec3(-1.0f,  0.0f, 0.0f));
+		glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(100.0f));
+		rotation = rotationX * rotationY;
+		target = glm::vec3(rotation * glm::vec4(0.0f, 0.0f, 1.0f, 1.0f));
+		view = glm::lookAt(player.position, player.position + target, up);
+		worldMatrix = projection * view;
+
 		glUniformMatrix4fv(u_worldMatrix, 1, GL_FALSE, glm::value_ptr(worldMatrix));
 		glUniformMatrix4fv(u_rotation, 1, GL_FALSE, glm::value_ptr(rotation));
 		glUniformMatrix4fv(u_view, 1, GL_FALSE, glm::value_ptr(view));
