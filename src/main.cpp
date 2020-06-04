@@ -39,14 +39,15 @@ using namespace MazeEngine;
 int main() {
 	Window win = Window("Test", 800, 600);
 	Shader shader = Shader("shaders/vert.glsl", "shaders/static.glsl");
-	Mesh mesh = Mesh("meshes/plane.ply");
-	// Mesh mesh = Mesh("meshes/object.ply");
+	Shader shader2 = Shader("shaders/vert.glsl", "shaders/static2.glsl");
+	Mesh mesh = Mesh("meshes/plane2.ply");
+	Mesh mesh2 = Mesh("meshes/object.ply");
 	Object object = Object(mesh, shader);
+	Object object2 = Object(mesh2, shader2);
 	Object player = Object();
 	player.position = glm::vec3(0.0f, 0.0f, 1.0f);
 	player.mass = 0.0125f;
 	player.drag = 0.15f;
-	// Object object2 = Object(mesh2, shader);
 	/* begin copy-paste old code */
 	unsigned u_worldMatrix = glGetUniformLocation(shader.getId(), "u_worldMatrix");
 	unsigned u_rotation = glGetUniformLocation(shader.getId(), "u_rotation");
@@ -71,6 +72,9 @@ int main() {
 	glfwSetKeyCallback(win.window, keyEvent);
 	glfwGetCursorPos(win.window, &lastX, &lastY);
 
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	
 	/* end copy-paste old code */
 	while (win.active()) {
 		win.clear();
@@ -100,29 +104,7 @@ int main() {
 			lastY = posY;
 		}
 		
-		// if (angleY > 269.9f) angleY = 269.9f;
-		// if (angleY < 90.1f) angleY = 90.1f;
-		
-		// if (glfwGetKey(win.window, GLFW_KEY_SPACE) && camera.y == 1.0f) {
-		// 	jumpSpeed += jumpAcc * win.dt;
-		// }
-		// jumpSpeed -= gravity * win.dt;
-		// camera.y += jumpSpeed * win.dt;
-		// if (camera.y < 1.0f) {
-		// 	camera.y = 1.0f;
-		// 	jumpSpeed = 0.0f;
-		// }
-		// for (int x = 0; x < 4; x++) {
-		// 	// If keys true add acc, else sub dec, coerce between zero and max
-		// 	speed[x] = keys[x] ? (speed[x] + acc > max ? max : speed[x] + acc) : (speed[x] - dec < 0 ? 0 : speed[x] - dec);
-		// 	// Compute angle, subtract 90 deg if sideways 
-		// 	float angle = angleX * M_PI / 180 - (x % 2 ? M_PI / 2 : 0);
-		// 	// Compute direction
-		// 	float dir = x < 2 ? -1 : 1;
-		// 	// Add speed in direction in dt
-		// 	camera.x -= speed[x] * sin(angle) * dir * win.dt;
-		// 	camera.z += speed[x] * cos(angle) * dir * win.dt;
-		// }
+		angleY = glm::clamp(angleY, 90.1f, 269.9f);
 		
 		glm::vec3 direction = glm::vec3(0.0f);
 		if(glfwGetKey(win.window, GLFW_KEY_W)) {
@@ -143,10 +125,11 @@ int main() {
 			player.force = glm::vec3(0.0f);
 		}
 		if (glfwGetKey(win.window, GLFW_KEY_SPACE) && player.position.y == 0.0f) {
-			player.force.y += 15.0f;
+			player.force.y += 100.0f * win.dt;
 		}
-		player.force.y -= 0.75f;
 		player.tick(win.dt);
+		player.position.y -= 50.0f * win.dt * win.dt / 2.0f;
+		player.force.y = 0.0f;
 		if (player.position.y < 0.0f) player.position.y = 0.0f;
 		projection = glm::perspective(glm::radians(90.0f), (float) width / (float) height, 0.1f, 20.0f);
 		rotationX = glm::rotate(glm::mat4(1.0f), glm::radians(angleX), glm::vec3( 0.0f, -1.0f, 0.0f));
@@ -164,8 +147,8 @@ int main() {
 		glUniform1f(u_time, glfwGetTime());
 
 		/* end copy-paste old code */
-		object.draw();
-		// object2.draw();
+		object2.draw();
+		// object.draw();
 		win.draw();
 	}
 	return 0;
