@@ -9,7 +9,7 @@ namespace MazeEngine {
 	class Mesh : public Component {
 		public:
 			Mesh() {}
-			Mesh(std::string src);
+			Mesh(std::string source);
 			void setSource(std::string source);
 			void loadMesh();
 			void init();

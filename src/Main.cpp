@@ -5,8 +5,8 @@
 
 using namespace MazeEngine;
 int main () {
-	Object obj;
-	Component* transform = obj.createComponent<Transform>();
-	obj.init();
+	Object player;
+	Component* transform = player.createComponent<Transform>();
+	player.init();
 	return 0;
 }
