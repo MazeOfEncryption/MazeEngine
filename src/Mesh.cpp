@@ -1,6 +1,6 @@
 #include "Mesh.hpp"
 MazeEngine::Mesh::Mesh(std::string source) {
-	this->source = source;
+	this->setSource(source);
 }
 void MazeEngine::Mesh::setSource(std::string source) {
 	this->source = source;
