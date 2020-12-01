@@ -12,7 +12,7 @@ namespace MazeEngine {
 			void setSource(std::string vert, std::string frag);
             void compile();
             unsigned getId();
-			void init();
+			void init() {}
 			void update() {}
         private:
             std::string vert, frag;
