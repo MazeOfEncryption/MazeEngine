@@ -1,3 +1,4 @@
+R""(
 #version 330 core
 in vec3 a_vertices;
 in vec3 a_normals;
@@ -15,3 +16,4 @@ void main () {
 	
 	gl_Position = u_worldMatrix * vec4(a_vertices, 1.0f);
 }
+)""

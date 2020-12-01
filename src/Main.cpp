@@ -1,4 +1,4 @@
-// #include <iostream>
+#define _USE_MATH_DEFINES
 #include "Transform.hpp"
 // #include "Object.hpp"
 // #include "Component.hpp"
@@ -6,11 +6,7 @@
 using namespace MazeEngine;
 int main () {
 	Object obj;
-	Component* trans = obj.createComponent<Transform>();
-	// std::cout << trans1->getParent() << trans2->getParent() << std::endl;
-	// Transform trans;
-	// obj.addComponent(&trans);
-	// std::cout << obj.createComponent<Transform>()->getName() << std::endl;
-	// obj.Init();
+	Component* transform = obj.createComponent<Transform>();
+	obj.init();
 	return 0;
 }

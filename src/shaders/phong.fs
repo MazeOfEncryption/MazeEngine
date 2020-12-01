@@ -1,3 +1,4 @@
+R""(
 #version 330 core
 in lowp vec4 v_color;
 in lowp vec3 v_normal;
@@ -26,3 +27,4 @@ void main () {
 	
 	color = vec4(light, 1.0f);
 }
+)""
