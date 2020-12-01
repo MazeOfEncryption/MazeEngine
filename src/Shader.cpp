@@ -3,7 +3,7 @@ MazeEngine::Shader::Shader (std::string vert, std::string frag) {
     this->vert = vert;
     this->frag = frag;
     this->compile();
-};
+}
 MazeEngine::Shader::Shader () {}
 void MazeEngine::Shader::setSource(std::string vert, std::string frag) {
 	this->vert = vert;
@@ -57,7 +57,7 @@ void MazeEngine::Shader::compile () {
 	
 	this->shaderProgram = shaderProgram;
 	std::cout << "Shaders loaded." << std::endl;
-};
+}
 unsigned MazeEngine::Shader::getId() {
     return this->shaderProgram;
 }
