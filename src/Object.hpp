@@ -1,6 +1,7 @@
 #ifndef MAZEENGINE_OBJECT
 #define MAZEENGINE_OBJECT
 #include <vector>
+#include <string>
 #include <memory>
 namespace MazeEngine {
 	class Component;
