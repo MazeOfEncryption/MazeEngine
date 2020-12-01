@@ -5,10 +5,9 @@
 #include <string>
 namespace MazeEngine {
 	class Object;
+	class Camera;
 	class Scene {
-		private:
-			void addObject(Object *object);
-			std::vector<Object *> Objects;
+		friend Camera;
 		public:
 			// Init all objects
 			void init();
@@ -31,6 +30,9 @@ namespace MazeEngine {
 			Scene(Args ...objects) {
 				this->add(objects...);
 			}
+		private:
+			void addObject(Object *object);
+			std::vector<Object *> Objects;
 	};
 }
 #endif
