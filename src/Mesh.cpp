@@ -1,5 +1,4 @@
 #include "Mesh.hpp"
-MazeEngine::Mesh::Mesh(){}
 MazeEngine::Mesh::Mesh(std::string source) {
 	this->source = source;
 }
@@ -15,4 +14,7 @@ void MazeEngine::Mesh::loadMesh() {
 	} else {
 		std::cout << "Error: Unsupported file format." << std::endl;
 	}
+}
+void MazeEngine::Mesh::init() {
+	if (!this->source.empty()) this->loadMesh();
 }
