@@ -2,12 +2,10 @@
 #define MAZEENGINE_OBJECT
 #include <vector>
 #include <string>
-#include <memory>
 namespace MazeEngine {
 	class Component;
 	class Object {
 		public:
-			std::string name = "Object!";
 			// Init all components
 			void init();
 			// Update all components
