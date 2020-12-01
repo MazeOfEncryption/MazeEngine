@@ -1,19 +1,16 @@
 #ifndef MAZEENGINE_TRANSFORM
 #define MAZEENGINE_TRANSFORM
+#include "Dep.hpp"
 #include "Component.hpp"
-#include <iostream>
 namespace MazeEngine {
 	class Transform : public Component {
 		public:
-			std::string getName() {
-				return "Transform";
-			}
-			float x, y, z;
+			glm::vec3 position;
+			glm::vec3 rotation;
+			glm::vec3 scale;
 			// Transform(){};
 			// ~Transform() {};
-			void init() {
-				std::cout << "Transform initialized." << std::endl;
-			}
+			void init() {}
 			void update() {}
 		private:
 	};
