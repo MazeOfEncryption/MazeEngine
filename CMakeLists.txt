@@ -17,7 +17,12 @@ include_directories(lib/glm/glm/)
 
 # link_directories(lib/FreeImage/Dist/x64/)
 
-add_executable(MazeEngine src/main.cpp src/Dep.hpp src/Read.cpp src/Read.hpp src/Window.cpp src/Window.hpp src/MazeEngine.hpp src/Shader.cpp src/Shader.hpp src/Mesh.cpp src/Mesh.hpp src/Object.cpp src/Object.hpp)
+add_executable(
+	MazeEngine src/Main.cpp src/Dep.hpp src/Read.cpp src/Read.hpp
+	src/Window.cpp src/Window.hpp src/MazeEngine.hpp src/Shader.cpp
+	src/Shader.hpp src/Mesh.cpp src/Mesh.hpp src/Object.cpp src/Object.hpp
+	src/Component.hpp src/Transform.hpp
+)
 
 target_link_libraries(MazeEngine glad)
 target_link_libraries(MazeEngine glfw)
