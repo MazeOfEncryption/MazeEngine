@@ -66,3 +66,6 @@ unsigned MazeEngine::Shader::getId() {
 void MazeEngine::useShader(MazeEngine::Shader shader) {
     glUseProgram(shader.getId());
 }
+void MazeEngine::Shader::use() {
+	glUseProgram(this->shaderProgram);
+}

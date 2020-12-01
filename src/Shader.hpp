@@ -12,6 +12,7 @@ namespace MazeEngine {
             ~Shader();
 			void setSource(std::string vert, std::string frag);
             void compile();
+			void use();
             unsigned getId();
 			void init() {}
 			void update() {}
