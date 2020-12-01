@@ -18,8 +18,8 @@ namespace MazeEngine {
 				(this->addComponent(components), ...);
 			}
 			template <class Type, class ...Types>
-			Component* createComponent (Types... args) {
-				Component *component = new Type(args...);
+			Type* createComponent (Types... args) {
+				Type *component = new Type(args...);
 				this->addComponent(component);
 				return component;
 			}
