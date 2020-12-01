@@ -17,17 +17,23 @@ include_directories(lib/glm/glm/)
 
 # link_directories(lib/FreeImage/Dist/x64/)
 
-add_executable(
-	MazeEngine src/Main.cpp src/Dep.hpp src/Read.cpp src/Read.hpp
-	src/Window.cpp src/Window.hpp src/MazeEngine.hpp src/Shader.cpp
-	src/Shader.hpp src/Mesh.cpp src/Mesh.hpp src/Object.cpp src/Object.hpp
-	src/Component.hpp src/Transform.hpp
-)
+file(GLOB_RECURSE SRCS ${PROJECT_SOURCE_DIR}/src/*.*)
+
+# add_executable(
+# 	MazeEngine src/Main.cpp src/Dep.hpp src/Read.cpp src/Read.hpp
+# 	src/Window.cpp src/Window.hpp src/Shader.cpp
+# 	src/Shader.hpp src/Mesh.cpp src/Mesh.hpp src/Object.cpp src/Object.hpp
+# 	src/Component.hpp src/Transform.hpp
+# )
+
+add_executable(MazeEngine ${SRCS})
 
 target_link_libraries(MazeEngine glad)
 target_link_libraries(MazeEngine glfw)
 # target_link_libraries(MazeEngine freeimage.lib)
 # target_link_libraries(MazeEngine -mwindows)
+
+target_compile_features(MazeEngine PRIVATE cxx_std_17)
 
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
 set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
