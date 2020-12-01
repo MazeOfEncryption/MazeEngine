@@ -5,6 +5,7 @@ MazeEngine::Shader::Shader (std::string vert, std::string frag) {
     this->compile();
 }
 MazeEngine::Shader::Shader () {}
+MazeEngine::Shader::~Shader () {}
 void MazeEngine::Shader::setSource(std::string vert, std::string frag) {
 	this->vert = vert;
     this->frag = frag;
